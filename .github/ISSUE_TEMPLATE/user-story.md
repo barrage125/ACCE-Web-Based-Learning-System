@@ -7,14 +7,14 @@ assignees: ''
 
 ---
 
-**Additional Details**
+## **Additional Details**
 
-**Acceptance Criteria**
+## **Acceptance Criteria**
  - [ ] <criterium 1>
  - [ ] <criterium 2>
  - [ ] <criterium 3>
 
-**Definition of Done**
+## **Definition of Done**
  - [ ] Meets linting guidelines
  - [ ] Meets formatting guidelines
  - [ ] Includes new tests
