@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACE Web Based Learning System", "ACE Web Based Learning System\ACE Web Based Learning System.csproj", "{D0BDCE2C-741F-4D32-B237-6BFA286F8DAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0BDCE2C-741F-4D32-B237-6BFA286F8DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0BDCE2C-741F-4D32-B237-6BFA286F8DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0BDCE2C-741F-4D32-B237-6BFA286F8DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0BDCE2C-741F-4D32-B237-6BFA286F8DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {554BBEC2-C952-4E8B-B5B3-EF9EF873A4C2}
+	EndGlobalSection
+EndGlobal
