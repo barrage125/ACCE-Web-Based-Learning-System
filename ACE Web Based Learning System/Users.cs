@@ -16,8 +16,11 @@ namespace ACE_Web_Based_Learning_System
     {
         public int ID { get; set; }
         public string LastName { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
-        public Nullable<int> Age { get; set; }
         public string UserRole { get; set; }
+        public int UserContent { get; set; }
+    
+        public virtual UserContent UserContent1 { get; set; }
     }
 }

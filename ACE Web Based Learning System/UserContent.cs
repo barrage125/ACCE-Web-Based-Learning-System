@@ -12,19 +12,22 @@ namespace ACE_Web_Based_Learning_System
     using System;
     using System.Collections.Generic;
     
-    public partial class CourseContent
+    public partial class UserContent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CourseContent()
+        public UserContent()
         {
-            this.Courses = new HashSet<Courses>();
+            this.Users = new HashSet<Users>();
         }
     
-        public int CourseID { get; set; }
-        public string CourseName { get; set; }
-        public string Content { get; set; }
+        public int UserID { get; set; }
+        public string Gender { get; set; }
+        public string Pronoun { get; set; }
+        public Nullable<int> Age { get; set; }
+        public string Color { get; set; }
+        public string StatusMessage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Courses> Courses { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

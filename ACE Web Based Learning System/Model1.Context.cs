@@ -13,10 +13,10 @@ namespace ACE_Web_Based_Learning_System
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class masterEntities : DbContext
+    public partial class masterEntities1 : DbContext
     {
-        public masterEntities()
-            : base("name=masterEntities")
+        public masterEntities1()
+            : base("name=masterEntities1")
         {
         }
     
@@ -27,6 +27,7 @@ namespace ACE_Web_Based_Learning_System
     
         public virtual DbSet<CourseContent> CourseContent { get; set; }
         public virtual DbSet<Courses> Courses { get; set; }
+        public virtual DbSet<UserContent> UserContent { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

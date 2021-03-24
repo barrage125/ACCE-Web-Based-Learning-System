@@ -11,9 +11,12 @@ namespace ACE_Web_Based_Learning_System.Controllers
 
         public ActionResult Index()
         {
-            var db = new masterEntities();
+            var db = new masterEntities1();
             Console.WriteLine(db.Users);
             Console.WriteLine(db.CourseContent);
+            var usercontent = new UserContent();
+            db.UserContent.Add(usercontent);
+            db.SaveChanges();
             return View();
         }
 
