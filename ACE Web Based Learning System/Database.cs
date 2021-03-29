@@ -8,7 +8,7 @@ namespace ACE_Web_Based_Learning_System
     public class Database
     {
         
-        public Database()
+        /*public Database()
         {
 
         }
@@ -102,7 +102,7 @@ namespace ACE_Web_Based_Learning_System
                 return false;
             }
             return true;
-        }
+        }*/
 
 
     }
