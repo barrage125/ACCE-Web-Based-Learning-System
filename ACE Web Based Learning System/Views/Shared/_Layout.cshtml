@@ -34,12 +34,16 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Sign Up", "UserSignup", "User")</li> <!-- Test -->
-                    <li>@Html.ActionLink("Sign In", "LoginPage", "User")</li> <!-- Test -->
+                    <li>@Html.ActionLink("Sign Up", "UserSignup", "Users")</li> <!-- Test -->
+                    <li>@Html.ActionLink("Sign In", "LoginPage", "Users")</li> <!-- Test -->
 
                     <!-- I tried both and they just would NOT work -->
                     <!--li><a href="ACCE-Web-Based-Learning-System\ACE Web Based Learning System\Views\User\UserSettings.cshtml">Settings</a></li>
-                    <li>@Html.ActionLink("Settings", "UserSettings", "User")</li> <!-- Adding link to settings page -->
+                    <li>@Html.ActionLink("Settings", "UserSettings", "User")</li> --> <!-- Adding link to settings page --> 
+                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                    <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
+                    <li>@Html.ActionLink("UserContent", "Index", "UserContent")</li>
+                    <li>@Html.ActionLink("CourseContent", "Index", "CourseContent")</li>
                 </ul>
             </div>
         </div>
