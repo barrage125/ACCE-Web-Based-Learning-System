@@ -15,7 +15,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
             var users = db.getUserList();
             if (users != null)
             {
-                ViewBag["Users"] = users;
+                
             }
            
             return View();
@@ -24,10 +24,40 @@ namespace ACE_Web_Based_Learning_System.Controllers
         {
             return View();
         }
-        
-        
-        
-        public void AddUserToDatabase(string firstName, string lastName, string email, string gender, string pronoun, int age, string role, string color)
+
+        public ActionResult UserSettings()
+        {
+            return View();
+        }
+
+        public ActionResult LoginPage()
+        {
+            return View();
+        }
+
+
+        public ActionResult CheckIfUser(string email, string password)
+        {
+          
+            if (db.login(email, password))
+            {
+                var loginresult = new LoginResult { Message = "success" };
+                return Json(loginresult);
+            }
+            else
+            {
+               
+                    var loginresult = new LoginResult { Message = "bad" };
+                    return Json(loginresult);
+                
+            }
+
+
+            
+
+        }
+
+        public ActionResult AddUserToDatabase(string firstName, string lastName, string email, string gender, string pronoun, int age, string role, string color, string password)
         {
             var newUser = new Users();
             var newUserContent = new UserContent();
@@ -37,16 +67,22 @@ namespace ACE_Web_Based_Learning_System.Controllers
             newUserContent.Age = age;
             newUserContent.StatusMessage = "";
             
-
+            newUser.Email = email;
             newUser.FirstName = firstName;
             newUser.LastName = lastName;
             newUser.UserRole = role;
-            newUser.Password = "password";
+            newUser.Password = password;
             db.addUserToDatabase(newUser, newUserContent);
-            
 
-            RedirectToAction("Index");
-            
+
+            return Json(Url.Action("Index", "User"));
+
         }
     }
+}
+public class LoginResult
+{
+   
+    public string Message { get; set; }
+  
 }

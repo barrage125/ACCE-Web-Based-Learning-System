@@ -20,7 +20,7 @@ namespace ACE_Web_Based_Learning_System
             this.Users = new HashSet<Users>();
         }
     
-        public int UserID { get; set; }
+        public System.Guid UserID { get; set; }
         public string Gender { get; set; }
         public string Pronoun { get; set; }
         public Nullable<int> Age { get; set; }

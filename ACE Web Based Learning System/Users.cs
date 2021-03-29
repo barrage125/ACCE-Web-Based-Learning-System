@@ -14,12 +14,13 @@ namespace ACE_Web_Based_Learning_System
     
     public partial class Users
     {
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string LastName { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string UserRole { get; set; }
-        public int UserContent { get; set; }
+        public string Email { get; set; }
+        public System.Guid UserContent { get; set; }
     
         public virtual UserContent UserContent1 { get; set; }
     }

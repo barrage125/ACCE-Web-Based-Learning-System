@@ -17,7 +17,7 @@ namespace ACE_Web_Based_Learning_System
         {
             try
             {
-                using (var db = new masterEntities1())
+                using (var db = new masterEntities2())
                 {
                     return db.Users.ToList();
                 }
@@ -32,7 +32,7 @@ namespace ACE_Web_Based_Learning_System
         {
             try
             {
-                using (var db = new masterEntities1())
+                using (var db = new masterEntities2())
                 {
                     return db.Users.Where(i => i.FirstName == firstName).ToList();
                 }
@@ -47,7 +47,7 @@ namespace ACE_Web_Based_Learning_System
         {
             try
             {
-                using (var db = new masterEntities1())
+                using (var db = new masterEntities2())
                 {
                     return db.Users.Where(i => i.LastName == lastName).ToList();
                 }
@@ -57,12 +57,29 @@ namespace ACE_Web_Based_Learning_System
                 return null;
             }
         }
+        public bool login(string email, string password)
+        {
+            using (var db = new masterEntities2())
+            {
+                var user = db.Users.Where(i => i.Email == email).ToList();
+                if (user.Count == 0)
+                {
+                    return false;
+                }
+                if (user[0].Password != password)
+                {
+                    return false;
+                }
+                return true;
 
+                
+            }
+        }
         public bool addUserToDatabase(Users user, UserContent userContent)
         {
             try
             {
-                using (var db = new masterEntities1())
+                using (var db = new masterEntities2())
                 {
                     var newUser = user;
                     var newUserContent = userContent;
@@ -87,7 +104,7 @@ namespace ACE_Web_Based_Learning_System
         {
             try
             {
-                using (var db = new masterEntities1())
+                using (var db = new masterEntities2())
                 {
                     var newUser = course;
                     var newUserContent = courseContent;
