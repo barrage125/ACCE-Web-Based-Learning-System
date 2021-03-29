@@ -3,5 +3,85 @@
     ViewBag.Title = "UserSettings";
 }
 
-<h2>User Settings</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <h1 class="h3 mb-4 page-title">Settings</h1>
+            <div class="my-4">
+                <form>
+                    <div class="text-center">
+                        <div class="row mt-5 align-items-center">
+                            <div class="col">
+                                <div class="col-md-12">
+                                    <h2 class="mb-1">Lastname, Firstname</h2>
+                                    <h3 class="mb-1">(Email Address)</h3>
+                                    <h4 class="mb-1">(Sex)</h4>
+                                    <img src="https://cdn.onlinewebfonts.com/svg/img_299586.png" height="100"
+                                         width="100" alt="Default User Icon">
+                                    <p class="small mb-3"><span class="badge badge-dark">(Role), Age</span></p>
+                                    <p class="text-muted">(Status)</p>
+                                    <p class="small mb-0 text-muted">(Street Address), (Zipcode)</p>
+                                    <p class="small mb-0 text-muted">(###) ###-####</p>
+                                    <p class="small mb-0 text-muted">(Pronouns)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" id="firstname" class="form-control" placeholder="Firstname" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" id="lastname" class="form-control" placeholder="Lastname" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="doe@john.me" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="inputAddress5">Address</label>
+                            <input type="text" class="form-control" id="inputAddress5" placeholder="Address" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="zipcode">Zip</label>
+                            <input type="text" class="form-control" id="zipcode" placeholder="#####" />
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="oldpassword">Current Password</label>
+                            <input type="password" class="form-control" id="oldpassword" />
+                            <label for="newpassword">New Password</label>
+                            <input type="password" class="form-control" id="newpassword" />
+                            <label for="confirmpw">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirmpw" />
+                            <br>
+                            <button type="submit" class="btn btn-black">Update Profile</button>
+                        </div>
+                        <div class="col-md-6">
+                            <br>
+                            <p class="mb-2">Password requirements</p>
+                            <p class="small text-muted mb-2">
+                                To create a new password, you have to meet all of the
+                                following requirements:
+                            </p>
+                            <ul class="small text-muted pl-4 mb-0">
+                                <li>Minimum 8 character</li>
+                                <li>At least one special character</li>
+                                <li>At least one number</li>
+                                <li>Can't be the same as a previous password</li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
