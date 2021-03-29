@@ -1,8 +1,17 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+
+}
+
+@{ 
+    var data = ViewData["Users"] as List<Users>;
 }
 
 <h2>Index</h2>
+@foreach(var user in data)
+            {
+                <div> @user.FirstName </div> <br />
+            }
 
 

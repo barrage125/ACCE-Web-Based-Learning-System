@@ -86,8 +86,7 @@ namespace ACE_Web_Based_Learning_System
                     
                     db.UserContent.Add(newUserContent);
                     
-                    db.SaveChanges();
-                    user.UserContent = newUserContent.UserID;
+                   
                     
                     db.Users.Add(user);
                     db.SaveChanges();

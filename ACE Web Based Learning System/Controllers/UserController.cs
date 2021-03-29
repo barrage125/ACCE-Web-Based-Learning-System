@@ -15,7 +15,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
             var users = db.getUserList();
             if (users != null)
             {
-                
+                ViewData["users"] = users;
             }
            
             return View();
@@ -61,12 +61,14 @@ namespace ACE_Web_Based_Learning_System.Controllers
         {
             var newUser = new Users();
             var newUserContent = new UserContent();
+            newUserContent.UserID = Guid.NewGuid();
+            newUser.ID = newUserContent.UserID;
             newUserContent.Pronoun = pronoun;
             newUserContent.Gender = gender;
             newUserContent.Color = color;
             newUserContent.Age = age;
             newUserContent.StatusMessage = "";
-            
+           
             newUser.Email = email;
             newUser.FirstName = firstName;
             newUser.LastName = lastName;
