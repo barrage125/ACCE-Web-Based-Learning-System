@@ -124,5 +124,57 @@ namespace ACE_Web_Based_Learning_System.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Users/LoginPage
+        public ActionResult LoginPage()
+        {
+            return View();
+        }
+
+        // GET: Users/UserSignup
+        public ActionResult UserSignup()
+        {
+            return View();
+        }
+
+        // GET: Users/UserSettings
+        public ActionResult UserSettings()
+        {
+            return View();
+        }
+
+        public bool login(string email, string password)
+        {
+            var users = db.Users.Where(i => i.Email == email).ToList();
+            if (users.Count == 0)
+            {
+                return false;
+            }
+            if (users[0].Password != password)
+            {
+                return false;
+            }
+            return true;
+        }
+        public ActionResult CheckIfUser(string email, string password)
+        {
+
+            if (login(email, password))
+            {
+                var loginresult = new LoginResult { Message = "success" };
+                return Json(loginresult);
+            }
+            else
+            {
+                var loginresult = new LoginResult { Message = "bad" };
+                return Json(loginresult);
+
+            }
+        }
+    }
+    public class LoginResult
+    {
+        public string Message { get; set; }
+
     }
 }

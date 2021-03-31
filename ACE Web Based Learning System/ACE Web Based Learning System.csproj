@@ -181,9 +181,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User1\LoginPage.cshtml" />
-    <Content Include="Views\User1\UserSettings.cshtml" />
-    <Content Include="Views\User1\UserSignup.cshtml" />
+    <Content Include="Views\Users\LoginPage.cshtml" />
+    <Content Include="Views\Users\UserSettings.cshtml" />
+    <Content Include="Views\Users\UserSignup.cshtml" />
     <Content Include="Views\User1\Index.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Delete.cshtml" />
@@ -208,7 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

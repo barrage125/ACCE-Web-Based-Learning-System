@@ -13,14 +13,14 @@ namespace ACE_Web_Based_Learning_System.Models
         {
             var users = new List<Users>
             {
-            new Users{ID=1,LastName="Alexander",Password="password",FirstName="Carson",UserRole="Student",UserContent=0,},
-            new Users{ID=2,LastName="Alonso",Password="password",FirstName="Meredith",UserRole="Student",UserContent=0,},
-            new Users{ID=3,LastName="Anand",Password="password",FirstName="Arturo",UserRole="Student",UserContent=0,},
-            new Users{ID=4,LastName="Barzdukas",Password="password",FirstName="Gytis",UserRole="Student",UserContent=0,},
-            new Users{ID=5,LastName="Li",Password="password",FirstName="Yan",UserRole="Student",UserContent=0,},
-            new Users{ID=6,LastName="Justice",Password="password",FirstName="Peggy",UserRole="Student",UserContent=0,},
-            new Users{ID=7,LastName="Norman",Password="password",FirstName="Laura",UserRole="Student",UserContent=0,},
-            new Users{ID=8,LastName="Olivetto",Password="password",FirstName="Nino",UserRole="Student",UserContent=0,}
+            new Users{ID=1,Email="user@test.com",LastName="Alexander",Password="password",FirstName="Carson",UserRole="Student",UserContent=0,},
+            new Users{ID=2,Email="user@test.com",LastName="Alonso",Password="password",FirstName="Meredith",UserRole="Student",UserContent=0,},
+            new Users{ID=3,Email="user@test.com",LastName="Anand",Password="password",FirstName="Arturo",UserRole="Student",UserContent=0,},
+            new Users{ID=4,Email="user@test.com",LastName="Barzdukas",Password="password",FirstName="Gytis",UserRole="Student",UserContent=0,},
+            new Users{ID=5,Email="user@test.com",LastName="Li",Password="password",FirstName="Yan",UserRole="Student",UserContent=0,},
+            new Users{ID=6,Email="user@test.com",LastName="Justice",Password="password",FirstName="Peggy",UserRole="Student",UserContent=0,},
+            new Users{ID=7,Email="user@test.com",LastName="Norman",Password="password",FirstName="Laura",UserRole="Student",UserContent=0,},
+            new Users{ID=8,Email="user@test.com",LastName="Olivetto",Password="password",FirstName="Nino",UserRole="Student",UserContent=0,}
             };
 
             users.ForEach(s => context.Users.Add(s));
