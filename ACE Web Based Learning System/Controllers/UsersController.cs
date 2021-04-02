@@ -14,10 +14,15 @@ namespace ACE_Web_Based_Learning_System.Controllers
     public class UsersController : Controller
     {
         private SchoolContext db = new SchoolContext();
+        public Users user;
 
         // GET: Users
         public ActionResult Index()
         {
+            if (Session["UserID"] != null)
+            {
+                return RedirectToAction("Index");
+            }
             return View(db.Users.ToList());
         }
 
@@ -47,7 +52,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,Password,FirstName,UserRole,UserContent")] Users users)
+        public ActionResult Create([Bind(Include = "ID,LastName,Password,FirstName,UserRole,UserContent,Course")] Users users)
         {
             if (ModelState.IsValid)
             {
@@ -140,7 +145,12 @@ namespace ACE_Web_Based_Learning_System.Controllers
         // GET: Users/UserSettings
         public ActionResult UserSettings()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View(Session["UserID"] as Users);
+            }
+
+            return RedirectToAction("LoginPage", "Users");
         }
 
         public bool login(string email, string password)
@@ -148,12 +158,16 @@ namespace ACE_Web_Based_Learning_System.Controllers
             var users = db.Users.Where(i => i.Email == email).ToList();
             if (users.Count == 0)
             {
+
                 return false;
+               
             }
             if (users[0].Password != password)
             {
                 return false;
             }
+            Session["UserID"] = users[0];
+           
             return true;
         }
         public ActionResult CheckIfUser(string email, string password)
@@ -162,7 +176,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
             if (login(email, password))
             {
                 var loginresult = new LoginResult { Message = "success" };
-                return Json(loginresult);
+                return Json(Url.Action("Index", "Home"));
             }
             else
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,8 @@ namespace ACE_Web_Based_Learning_System.Models
         public string UserRole { get; set; }
         public int UserContent { get; set; }
 
+
+       
         public virtual UserContent UserContent1 { get; set; }
     }
 }

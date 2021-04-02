@@ -1,0 +1,124 @@
+﻿@model ACE_Web_Based_Learning_System.Models.Users
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Optional theme -->
+    <!-- I notice that the signup page only renders correctly when I import the bootstrap stylesheets manually
+         rather than using the format below. Also, I'm not sure how to determine the order of the pages like
+         starting from the Login and then going to the home page, so hopefully you have better luck with it than I did. -->
+    <style>
+        .userCard {
+display:flex;
+flex-direction: column;
+width: 300px;
+
+text-align:center;
+color:black;
+font-size: 18px;
+
+        }
+        .userInfo {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            
+        }
+        .dropdown-menu-center {
+            right: auto;
+            left: 17%;
+            -webkit-transform: translate(-83%, 5%);
+            -o-transform: translate(-83%, 5%);
+            transform: translate(-83%, 5%);
+        }
+        .userButton{
+            background-color:transparent
+             ; border-top-style:solid;
+               border-width: 1px;
+               padding-top: 10px;
+               color: gray;
+               border-color: lightgray;
+               margin-top: 10px;
+               cursor: pointer;
+        }
+    </style>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">ACE Web Based Learning System</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="material-icons">face</span>
+
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdownMenu1">
+                            <li>
+                                <div class="userCard">
+                                    <div class="userInfo">
+                                        <span class="material-icons" style="font-size: 100px;">face</span>
+                                        <div> @Model.FirstName  @Model.LastName</div>
+
+                                        <div style="color: lightgray"> @Model.Email</div>
+                                    </div>
+                                    <div id="manageButton" class="userButton">
+                                        Manage your account settings
+                                    </div>
+                                    <div id="signOutButton" class="userButton">
+                                        Sign out
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+
+            <nav class="mdl-navigation">
+
+                <a class="mdl-navigation__link" href="">Account</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="page-content"> @RenderBody()</div>
+        </main>
+    </div>
+   
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        document.getElementById("manageButton").addEventListener("click", function () {
+
+
+            window.location.href = "/Users/UserSettings";
+
+
+
+        });
+    </script>
+</body>
+</html>
