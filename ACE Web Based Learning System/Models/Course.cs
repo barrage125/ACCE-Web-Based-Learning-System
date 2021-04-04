@@ -9,15 +9,20 @@ namespace ACE_Web_Based_Learning_System.Models
 {
     public class Course
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID { get; set; }
+        [Required, RegularExpression(@"^[0-9]{4}$",
+            ErrorMessage = "4-Digit course numbers only.")]
+        public string CourseNo { get; set; }
         public string CourseName { get; set; }
-        public int CourseContent { get; set; }
         [Required]
-        public string DEPARTMENT_ID { get; set; }
-
-        public virtual CourseContent CourseContent { get; set; }
+        public string DepartmentID { get; set; }
+        [Key]
+        public string ID
+        {
+            get { return DepartmentID + " " + CourseNo; }
+        }
         public virtual Department Department { get; set; }
+        public virtual ICollection<CourseContent> CourseContents { get; set; }
         public virtual ICollection<Section> Sections { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
     }
 }

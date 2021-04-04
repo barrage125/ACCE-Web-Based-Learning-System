@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -8,15 +9,19 @@ namespace ACE_Web_Based_Learning_System.Models
 {
     public class User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
-        public string Email { get; set; }
+        [Required, RegularExpression(@"^[A-Z]+.*$",
+            ErrorMessage = "Must be capital and at least one letter.")]
         public string LastName { get; set; }
-        public string Password { get; set; }
+        [Required, RegularExpression(@"^[A-Z]+.*$",
+            ErrorMessage = "Must be capital and at least one letter.")]
         public string FirstName { get; set; }
-        public string UserRole { get; set; }
-        public int UserContent { get; set; }
 
-        public virtual UserContent UserContent1 { get; set; }
+        public virtual UserContent UserContent { get; set; }
+        public virtual Credential Credential { get; set; }
+        public virtual ICollection<TestGrade> TestGrades { get; set; }
+        public virtual ICollection<TestAttempt> TestAttempts { get; set; }
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
+
     }
 }
