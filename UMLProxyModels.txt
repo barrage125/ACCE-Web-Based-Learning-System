@@ -1,0 +1,95 @@
+@startuml
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "UserContent" as UC {
+  *ID : number <<generated>>
+  --
+  *Email : string
+  Age : number
+  Gender : string
+  Pronoun : string
+  *Color : string
+  Status : string
+  * **UserID : number (FK)**
+}
+
+entity "User" as U {
+  *ID : number <<generated>>
+  --
+  *FirstName : string
+  *LastName : string
+}
+entity "Credential" as Cred {
+  *ID : string
+  --
+  *Password
+  * **UserID : number (FK)**
+}
+entity "Enrollment" as E {
+  * **UserID : number (FK)**
+  * **SectionID : string (FK)**
+  --
+  *Type : string
+}
+entity "Section" as S {
+  *SectionNo : string
+  * **CourseID : string (FK)**
+  --
+  Capacity : number
+}
+entity "Course" as C {
+  *CourseNo : number
+  * **DepartmentID : number (FK)**
+  --
+  *CourseName : String
+}
+entity "CourseContent" as CC {
+  *ID : number <<generated>>
+  --
+  *Content : JSON
+  * **CourseID : string (FK)**
+}
+entity "Department" as D {
+  *ID : string
+  --
+  DeptName : string
+}
+entity "Test" as T {
+  *ID : number <<generated>>
+  --
+  *Questions : JSON
+  * **CourseID : string (FK)**
+}
+entity "TestAttempt" as TA {
+  *ID : number <<generated>>
+  --
+  *Answers : JSON
+  * **TestID : number (FK)**
+  * **UserID : number (FK)**
+  * **TestGradeID : number (FK)**
+}
+entity "TestGrade" as TG {
+  *ID : number <<generated>>
+  --
+  Grade : number
+  * **TestAttemptID : number (FK)**
+  * **UserID : number (FK)**
+}
+
+UC ||..|| U : described by
+U ||..|| Cred : authenticates with
+U ||..o{ E : has
+U ||..o{ TG : receives
+U ||..o{ TA : makes
+TA ||..|| TG : scores on
+TA }o..|| T : completed by
+E }o..|| S : registers in
+S }|..|| C : composed of
+C }o..|| D : belongs to
+T }o..|| C : assesses with
+CC }o..|| C : has
+@enduml

@@ -47,7 +47,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserID,Gender,Pronoun,Age,Color,StatusMessage")] UserContent userContent)
+        public ActionResult Create([Bind(Include = "ID,UserID,Gender,Pronoun,Age,Color,Status")] UserContent userContent)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UserID,Gender,Pronoun,Age,Color,StatusMessage")] UserContent userContent)
+        public ActionResult Edit([Bind(Include = "ID,UserID,Gender,Pronoun,Age,Color,Status")] UserContent userContent)
         {
             if (ModelState.IsValid)
             {

@@ -15,7 +15,8 @@ namespace ACE_Web_Based_Learning_System.Models
         public Nullable<int> Age { get; set; }
         [Required]
         public string Color { get; set; } = "Grey";
-        public string StatusMessage { get; set; }
+        public string Status { get; set; }
+        [Required]
         public string Email { get; set; }
 
         public virtual User User { get; set; }
