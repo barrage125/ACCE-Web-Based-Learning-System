@@ -5,7 +5,12 @@ using System.Web;
 
 namespace ACE_Web_Based_Learning_System.Models
 {
-    public class ENROLLMENTS
+    public class Enrollment
     {
+        public string TYPE { get; set; }
+        public int SECTION_ID { get; set; }
+        public int USER_ID { get; set; }
+        public virtual Section Section { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -139,10 +139,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CourseContent.cs" />
-    <Compile Include="Models\Courses.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\TestGrade.cs" />
     <Compile Include="Models\SchoolInitializer.cs" />
+    <Compile Include="Models\Section.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestAttempt.cs" />
     <Compile Include="Models\UserContent.cs" />
-    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\WebID.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

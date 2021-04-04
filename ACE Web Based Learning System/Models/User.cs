@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ACE_Web_Based_Learning_System.Models
 {
-    public class Users
+    public class User
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }

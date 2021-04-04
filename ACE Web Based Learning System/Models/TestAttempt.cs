@@ -5,12 +5,11 @@ using System.Web;
 
 namespace ACE_Web_Based_Learning_System.Models
 {
-    public class CourseContent
+    public class TestAttempt
     {
         public int ID { get; set; }
-        public int CourseID { get; set; }
-        public string Content { get; set; }
 
-        public virtual Course Course { get; set; }
+        //Holds JSON data representing student-submitted answers to test questions
+        public string ANSWERS { get; set; }
     }
 }
