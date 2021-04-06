@@ -15,8 +15,9 @@ namespace ACE_Web_Based_Learning_System.Models
         public string QUESTIONS { get; set; }
         [Required]
         public int CourseID { get; set; }
+        //public int TestAttemptID { get; set; }
         public virtual Course Course { get; set; }
-        public virtual TestAttempt TestAttempt { get; set; }
+        public virtual ICollection<TestAttempt> TestAttempts { get; set; }
         
     }
 }

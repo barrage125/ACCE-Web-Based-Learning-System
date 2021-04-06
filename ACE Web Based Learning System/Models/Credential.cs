@@ -10,7 +10,7 @@ namespace ACE_Web_Based_Learning_System.Models
     public class Credential
     {
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ID { get; set; }
         [Required]
         public string Password { get; set; }

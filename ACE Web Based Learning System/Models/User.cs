@@ -16,6 +16,8 @@ namespace ACE_Web_Based_Learning_System.Models
         [Required, RegularExpression(@"^[A-Z]+.*$",
             ErrorMessage = "Must be capital and at least one letter.")]
         public string FirstName { get; set; }
+        //public int UserContentID { get; set; }
+        //public string CredentialID { get; set; }
 
         public virtual UserContent UserContent { get; set; }
         public virtual Credential Credential { get; set; }

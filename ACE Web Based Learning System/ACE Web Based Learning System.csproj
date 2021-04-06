@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -129,10 +129,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CourseContentController.cs" />
-    <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\CredentialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserContentController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Global.asax.cs">
@@ -188,9 +189,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Users\LoginPage.cshtml" />
-    <Content Include="Views\Users\UserSettings.cshtml" />
-    <Content Include="Views\Users\UserSignup.cshtml" />
+    <Content Include="Views\User\LoginPage.cshtml" />
+    <Content Include="Views\User\UserSettings.cshtml" />
+    <Content Include="Views\User\UserSignup.cshtml" />
     <Content Include="Views\User1\Index.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Delete.cshtml" />
@@ -202,16 +203,21 @@
     <Content Include="Views\CourseContent\Details.cshtml" />
     <Content Include="Views\CourseContent\Edit.cshtml" />
     <Content Include="Views\CourseContent\Index.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\UserContent\Create.cshtml" />
     <Content Include="Views\UserContent\Delete.cshtml" />
     <Content Include="Views\UserContent\Details.cshtml" />
     <Content Include="Views\UserContent\Edit.cshtml" />
     <Content Include="Views\UserContent\Index.cshtml" />
+    <Content Include="Views\Credential\Create.cshtml" />
+    <Content Include="Views\Credential\Delete.cshtml" />
+    <Content Include="Views\Credential\Details.cshtml" />
+    <Content Include="Views\Credential\Edit.cshtml" />
+    <Content Include="Views\Credential\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
