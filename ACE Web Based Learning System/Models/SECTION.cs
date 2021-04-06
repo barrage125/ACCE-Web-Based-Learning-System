@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,13 +14,14 @@ namespace ACE_Web_Based_Learning_System.Models
         public int SectionNo { get; set; }
         public Nullable<int> Capacity { get; set; }
         [Required]
-        public int CourseID { get; set; }
+        public string CourseID { get; set; }
         [Key]
         public string ID
         {
             get { return CourseID + "-" + SectionNo; }
         }
         public virtual Course Course { get; set; }
+        
         public virtual ICollection<Enrollment> enrollments { get; set; }
     }
 }

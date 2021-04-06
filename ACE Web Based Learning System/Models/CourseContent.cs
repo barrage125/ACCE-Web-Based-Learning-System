@@ -9,7 +9,7 @@ namespace ACE_Web_Based_Learning_System.Models
     public class CourseContent
     {
         public int ID { get; set; }
-        public int CourseID { get; set; }
+        public string CourseID { get; set; }
         
         //JSON data containing the appropriate course content and associated TESTS + MINUMUM GRADE
         [Required]

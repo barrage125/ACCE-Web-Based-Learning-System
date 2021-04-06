@@ -1,4 +1,8 @@
-﻿@model ACE_Web_Based_Learning_System.Models.Users
+﻿@model ACE_Web_Based_Learning_System.Models.User
+    @{ 
+        var userContent = Session["UserContent"] as ACE_Web_Based_Learning_System.Models.UserContent;
+        var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Enrollment>;
+    }
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +78,7 @@ font-size: 18px;
                                         <span class="material-icons" style="font-size: 100px;">face</span>
                                         <div> @Model.FirstName  @Model.LastName</div>
 
-                                        <div style="color: lightgray"> @Model.Email</div>
+                                        <div style="color: lightgray"> @userContent.Email</div>
                                     </div>
                                     <div id="manageButton" class="userButton">
                                         Manage your account settings
@@ -93,7 +97,7 @@ font-size: 18px;
 
             <nav class="mdl-navigation">
 
-                <a class="mdl-navigation__link" href="">Account</a>
+                <a class="mdl-navigation__link" href="">@courses[0].Section.Course.CourseName</a>
                 <a class="mdl-navigation__link" href="">Link</a>
                 <a class="mdl-navigation__link" href="">Link</a>
 

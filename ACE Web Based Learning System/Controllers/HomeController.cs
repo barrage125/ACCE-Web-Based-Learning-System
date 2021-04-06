@@ -18,7 +18,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
                 return View(Session["UserID"] as User);
             }
 
-            return RedirectToAction("LoginPage", "Users");
+            return RedirectToAction("LoginPage", "User");
         }
 
         public ActionResult About()
@@ -30,7 +30,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
                 return View(Session["UserID"] as User);
             }
 
-            return RedirectToAction("LoginPage", "Users");
+            return RedirectToAction("LoginPage", "User");
         }
 
         public ActionResult Contact()
@@ -42,7 +42,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
                 return View(Session["UserID"] as User);
             }
 
-            return RedirectToAction("LoginPage", "Users");
+            return RedirectToAction("LoginPage", "User");
         }
     }
 }

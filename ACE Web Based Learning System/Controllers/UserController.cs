@@ -23,7 +23,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View(db.Users.ToList());
+            return View(db.User.ToList());
         }
 
         // GET: Users/Details/5
@@ -149,28 +149,39 @@ namespace ACE_Web_Based_Learning_System.Controllers
         {
             if (Session["UserID"] != null)
             {
+                ViewData["UserContent"] = Session["UserContent"];
+                ViewData["UserCredentials"] = Session["UserCredentials"];
                 return View(Session["UserID"] as User);
             }
 
-            return RedirectToAction("LoginPage", "Users");
+            return RedirectToAction("LoginPage", "User");
         }
 
         public bool login(string username, string password)
         {
-            
-            var users = db.Users.Where(i => i.Credential.ID == email).ToList();
+
+            var users = db.Credential.Where(i => i.ID == username).ToList();
+            var userCotnent = db.UserContent.Where(i => i.ID == username).ToList();
+            Console.WriteLine(users.Count);
             if (users.Count == 0)
             {
 
                 return false;
                
             }
-            if (users[0].Credential.Password != password)
+            if (users[0].Password != password)
             {
                 return false;
             }
-            Session["UserID"] = users[0];
+            var d = Convert.ToInt32(users[0].UserID);
+            var courses = db.Enrollment.Where(i => i.UserID == d).ToList();
+            Console.WriteLine(courses[0].Section.Course.CourseName);
+            Session["Courses"] = courses;
+            Session["UserID"] = users[0].User;
            
+            Session["UserContent"] = userCotnent[0];
+            Session["UserCredentials"] = users[0];
+
             return true;
         }
         public ActionResult CheckIfUser(string email, string password)

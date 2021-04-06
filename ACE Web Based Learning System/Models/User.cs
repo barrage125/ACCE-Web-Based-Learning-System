@@ -8,7 +8,8 @@ using System.Web;
 namespace ACE_Web_Based_Learning_System.Models
 {
     public class User
-    {
+    {   
+        [Key]
         public int ID { get; set; }
         [Required, RegularExpression(@"^[A-Z]+.*$",
             ErrorMessage = "Must be capital and at least one letter.")]
@@ -25,9 +26,11 @@ namespace ACE_Web_Based_Learning_System.Models
         public virtual UserContent UserContent { get; set; }
         
         public virtual Credential Credential { get; set; }
-        [ForeignKey("ID")]
+       
         public virtual ICollection<TestGrade> TestGrades { get; set; }
         public virtual ICollection<TestAttempt> TestAttempts { get; set; }
+       
+
         public virtual ICollection<Enrollment> Enrollments { get; set; }
 
     }
