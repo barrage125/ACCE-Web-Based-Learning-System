@@ -1,12 +1,10 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "ACE - Learning Management System";
 }
-
-
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
+
 <style>
     body {
         font-family: "Lato", sans-serif;
@@ -27,7 +25,7 @@
 
     .sidenav {
         height: 100%;
-        background-color: rgb(63,81,181);
+        background-color: #37464f;
         overflow-x: hidden;
         padding-top: 20px;
     }
@@ -41,7 +39,6 @@
             padding-top: 15px;
         }
     }
-
 
     @@media screen and (max-width: 450px) {
         .login-form {
@@ -75,22 +72,22 @@
         }
     }
 
-
     .login-main-text {
         margin-top: 20%;
         padding: 60px;
         color: #fff;
     }
 
-        .login-main-text h2 {
-            font-weight: 300;
-        }
+    .login-main-text h2 {
+        font-weight: 300;
+    }
 
     .btn-black {
         background-color: #000 !important;
         color: #fff;
     }
 </style>
+
 <div class="sidenav">
     <div class="login-main-text">
         <h1>ACE</h1>
@@ -102,29 +99,25 @@
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="emailInput">
-                <label class="mdl-textfield__label" for="emailInput">Email</label>
+                <label class="mdl-textfield__label" for="emailInput">Username</label>
                 <span class="mdl-textfield__error">Must not be empty!</span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="passwordInput">
+                <input class="mdl-textfield__input" type="password" id="passwordInput">
                 <label class="mdl-textfield__label" for="passwordInput">Password</label>
                 <span class="mdl-textfield__error">Must not be empty!</span>
             </div>
-            <br />
-            <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                Login
-            </button>
+            <br>
+            <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
             <a href="EmailConfirmation.html">Forgot Password?</a>
             <br><br>
             <p>Don't have an account? Sign up <a href="SignUp.html">here</a>.</p>
-
         </div>
     </div>
-
 </div>
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>

@@ -1,38 +1,32 @@
 ﻿@model ACE_Web_Based_Learning_System.Models.User
-    @{ 
-        var userContent = Session["UserContent"] as ACE_Web_Based_Learning_System.Models.UserContent;
-        var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Enrollment>;
-    }
+@{
+    var userContent = Session["UserContent"] as ACE_Web_Based_Learning_System.Models.UserContent;
+    var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Enrollment>;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <!-- Optional theme -->
-    <!-- I notice that the signup page only renders correctly when I import the bootstrap stylesheets manually
-         rather than using the format below. Also, I'm not sure how to determine the order of the pages like
-         starting from the Login and then going to the home page, so hopefully you have better luck with it than I did. -->
     <style>
         .userCard {
-display:flex;
-flex-direction: column;
-width: 300px;
-
-text-align:center;
-color:black;
-font-size: 18px;
-
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            text-align: center;
+            color: black;
+            font-size: 18px;
         }
+
         .userInfo {
             display: flex;
             flex-direction: column;
             margin-bottom: 20px;
-            
         }
+
         .dropdown-menu-center {
             right: auto;
             left: 17%;
@@ -40,22 +34,23 @@ font-size: 18px;
             -o-transform: translate(-83%, 5%);
             transform: translate(-83%, 5%);
         }
-        .userButton{
-            background-color:transparent
-             ; border-top-style:solid;
-               border-width: 1px;
-               padding-top: 10px;
-               color: gray;
-               border-color: lightgray;
-               margin-top: 10px;
-               cursor: pointer;
+
+        .userButton {
+            background-color: transparent;
+            border-top-style: solid;
+            border-width: 1px;
+            padding-top: 10px;
+            color: black;
+            border-color: #37464f;
+            margin-top: 10px;
+            cursor: pointer;
         }
     </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
 
+<body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -76,16 +71,11 @@ font-size: 18px;
                                 <div class="userCard">
                                     <div class="userInfo">
                                         <span class="material-icons" style="font-size: 100px;">face</span>
-                                        <div> @Model.FirstName  @Model.LastName</div>
-
-                                        <div style="color: lightgray"> @userContent.Email</div>
+                                        <div>@Model.FirstName  @Model.LastName</div>
+                                        <div style="color: black"> @userContent.Email</div>
                                     </div>
-                                    <div id="manageButton" class="userButton">
-                                        Manage your account settings
-                                    </div>
-                                    <div id="signOutButton" class="userButton">
-                                        Sign out
-                                    </div>
+                                    <div id="manageButton" class="userButton">Manage Account Settings</div>
+                                    <div id="signOutButton" class="userButton">Sign Out</div>
                                 </div>
                             </li>
                         </ul>
@@ -107,8 +97,6 @@ font-size: 18px;
             <div class="page-content"> @RenderBody()</div>
         </main>
     </div>
-   
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -116,12 +104,7 @@ font-size: 18px;
 
     <script>
         document.getElementById("manageButton").addEventListener("click", function () {
-
-
             window.location.href = "/Users/UserSettings";
-
-
-
         });
     </script>
 </body>
