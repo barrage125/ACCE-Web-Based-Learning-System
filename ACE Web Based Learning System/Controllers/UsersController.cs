@@ -14,10 +14,15 @@ namespace ACE_Web_Based_Learning_System.Controllers
     public class UsersController : Controller
     {
         private SchoolContext db = new SchoolContext();
+        public User user;
 
         // GET: Users
         public ActionResult Index()
         {
+            if (Session["UserID"] != null)
+            {
+                return RedirectToAction("Index");
+            }
             return View(db.Users.ToList());
         }
 
@@ -140,20 +145,30 @@ namespace ACE_Web_Based_Learning_System.Controllers
         // GET: Users/UserSettings
         public ActionResult UserSettings()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View(Session["UserID"] as User);
+            }
+
+            return RedirectToAction("LoginPage", "Users");
         }
 
         public bool login(string email, string password)
         {
-            var users = db.Users.Where(i => i.Email == email).ToList();
+            
+            var users = db.Users.Where(i => i.Credential.ID == email).ToList();
             if (users.Count == 0)
             {
+
                 return false;
+               
             }
-            if (users[0].Password != password)
+            if (users[0].Credential.Password != password)
             {
                 return false;
             }
+            Session["UserID"] = users[0];
+           
             return true;
         }
         public ActionResult CheckIfUser(string email, string password)
@@ -162,7 +177,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
             if (login(email, password))
             {
                 var loginresult = new LoginResult { Message = "success" };
-                return Json(loginresult);
+                return Json(Url.Action("Index", "Home"));
             }
             else
             {

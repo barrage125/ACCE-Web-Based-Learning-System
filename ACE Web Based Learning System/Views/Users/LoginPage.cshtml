@@ -1,45 +1,144 @@
 ﻿
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "ACE - Learning Management System";
 }
 
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<style>
+    body {
+        font-family: "Lato", sans-serif;
+    }
+
+    h1 {
+        font-size: 75px;
+    }
+
+    p {
+        color: black;
+    }
+
+    .main-head {
+        height: 150px;
+        background: #FFF;
+    }
+
+    .sidenav {
+        height: 100%;
+        background-color: rgb(63,81,181);
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    .main {
+        padding: 0px 10px;
+    }
+
+    @@media screen and (max-height: 450px) {
+        .sidenav {
+            padding-top: 15px;
+        }
+    }
+
+
+    @@media screen and (max-width: 450px) {
+        .login-form {
+            margin-top: 10%;
+        }
+
+        .register-form {
+            margin-top: 10%;
+        }
+    }
+
+    @@media screen and (min-width: 768px) {
+        .main {
+            margin-left: 40%;
+        }
+
+        .sidenav {
+            width: 40%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+
+        .login-form {
+            margin-top: 80%;
+        }
+
+        .register-form {
+            margin-top: 20%;
+        }
+    }
+
+
+    .login-main-text {
+        margin-top: 20%;
+        padding: 60px;
+        color: #fff;
+    }
+
+        .login-main-text h2 {
+            font-weight: 300;
+        }
+
+    .btn-black {
+        background-color: #000 !important;
+        color: #fff;
+    }
+</style>
 <div class="sidenav">
     <div class="login-main-text">
         <h1>ACE</h1>
         <h3>Learning Management System</h3>
-        <p>Login or register from here to access.</p>
+        <p style="color:white">Login or register from here to access.</p>
     </div>
 </div>
+
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-           
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="User Name">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <button id="submit" class="btn btn-black">Login</button>
-                <a href="EmailConfirmation.html">Forgot Password?</a>
-                <br><br>
-                <p>Don't have an account? Sign up <a href="SignUp.html">here</a>.</p>
-          
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="emailInput">
+                <label class="mdl-textfield__label" for="emailInput">Email</label>
+                <span class="mdl-textfield__error">Must not be empty!</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="passwordInput">
+                <label class="mdl-textfield__label" for="passwordInput">Password</label>
+                <span class="mdl-textfield__error">Must not be empty!</span>
+            </div>
+            <br />
+            <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Login
+            </button>
+            <a href="EmailConfirmation.html">Forgot Password?</a>
+            <br><br>
+            <p>Don't have an account? Sign up <a href="SignUp.html">here</a>.</p>
+
         </div>
     </div>
+
 </div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script>
     //DO NOT KEEP THIS HERE, ADD TO BUNDLE
     document.getElementById("submit").addEventListener("click", function () {
-       
-        var email = document.getElementById("email").value;
-       
-        var password = document.getElementById("password").value;
-       
-      
-       
+
+        var email = document.getElementById("emailInput").value;
+
+        var password = document.getElementById("passwordInput").value;
+
+
+        Swal.showLoading()
 
         fetch('/Users/CheckIfUser?Email=' + email + '&password=' + password, {
             method: 'post',
@@ -51,8 +150,29 @@
                 }
 
                 response.json().then(function (data) {
-                    console.log(data.Message);
-                    alert(data.Message)
+                    if (data.Message == null) {
+                        Swal.fire({
+
+                            icon: 'success',
+                            title: 'Successful Login',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then((result) => {
+                            window.location.href = data;
+                        })
+
+                    }
+
+                    else {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Login',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
                 });
             })
             .catch(function (err) {

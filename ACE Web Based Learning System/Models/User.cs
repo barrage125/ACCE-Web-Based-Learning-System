@@ -12,13 +12,18 @@ namespace ACE_Web_Based_Learning_System.Models
         public int ID { get; set; }
         [Required, RegularExpression(@"^[A-Z]+.*$",
             ErrorMessage = "Must be capital and at least one letter.")]
+
+
+
         public string LastName { get; set; }
         [Required, RegularExpression(@"^[A-Z]+.*$",
             ErrorMessage = "Must be capital and at least one letter.")]
         public string FirstName { get; set; }
 
         public virtual UserContent UserContent { get; set; }
+        
         public virtual Credential Credential { get; set; }
+        [ForeignKey("ID")]
         public virtual ICollection<TestGrade> TestGrades { get; set; }
         public virtual ICollection<TestAttempt> TestAttempts { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
