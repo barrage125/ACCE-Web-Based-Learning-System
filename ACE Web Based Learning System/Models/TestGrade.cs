@@ -11,7 +11,7 @@ namespace ACE_Web_Based_Learning_System.Models
         public Nullable<int> Grade { get; set; }
         public int TestAttemptID { get; set; }
         public int UserID { get; set; }
-        public virtual TestAttempt test_attempt { get; set; }
+        public virtual TestAttempt TestAttempt{ get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -11,23 +11,38 @@ namespace ACE_Web_Based_Learning_System.Models
     {
         protected override void Seed(SchoolContext context)
         {
-            var credential = new Credential { Password = "password", ID = "HEYOP" };
-            var users = new List<User>
+            /*var users = new List<User>
             {
-            
-            new User{ID=1,Credential= credential,LastName="Alexander",FirstName="Carson",UserContent=new UserContent{Email = "user@test.com"} },
-         
-            new User{ID=2,Credential= credential,LastName="Mr",FirstName="Worldwide",UserContent=new UserContent{Email = "user@test.com"} },
-            new User{ID=3,Credential= credential,LastName="Test",FirstName="User",UserContent=new UserContent{Email = "user@test.com"} },
-            new User{ID=4,Credential= credential,LastName="Big",FirstName="Eric",UserContent=new UserContent{Email = "user@test.com"} },
-            new User{ID=5,Credential= credential,LastName="Big",FirstName="Alex",UserContent=new UserContent{Email = "user@test.com"} },
-            new User{ID=6,Credential= credential,LastName="Big",FirstName="Cassidy",UserContent=new UserContent{Email = "user@test.com"} },
-         
+            new User{LastName="Alexander",FirstName="Carson"},
+            new User{LastName="Alonso",FirstName="Meredith"},
+            new User{LastName="Anand",FirstName="Arturo"},
+            new User{LastName="Barzdukas",FirstName="Gytis"},
+            new User{LastName="Li",FirstName="Yan"},
+            new User{LastName="Justice",FirstName="Peggy"},
+            new User{LastName="Norman",FirstName="Laura"},
+            new User{LastName="Olivetto",FirstName="Nino"}
             };
-         
-
-            users.ForEach(s => context.Users.Add(s));
+            
+            users.ForEach(s => context.User.Add(s));
             context.SaveChanges();
+            */
+            /*
+            var credentials = new List<Credential>
+            {
+            new Credential{ID="user1",Password="password", UserID=users[0].ID, User=User[0]},
+            new Credential{ID="user2",Password="password", UserID=users[1].ID, User=User[1]},
+            new Credential{ID="user3",Password="password", UserID=users[2].ID, User=User[2]},
+            new Credential{ID="user4",Password="password", UserID=users[3].ID, User=User[3]},
+            new Credential{ID="user5",Password="password", UserID=users[4].ID, User=User[4]},
+            new Credential{ID="user6",Password="password", UserID=users[5].ID, User=User[5]},
+            new Credential{ID="user7",Password="password", UserID=users[6].ID, User=User[6]},
+            new Credential{ID="user8",Password="password", UserID=users[7].ID, User=User[7]}
+            };
+
+            credentials.ForEach(s => context.Credential.Add(s));
+            context.SaveChanges();
+            */
+            /*
             var courses = new List<Course>
             {
             new Course{CourseNo="1050",CourseName="Chemistry"},
@@ -39,7 +54,7 @@ namespace ACE_Web_Based_Learning_System.Models
             new Course{CourseNo="2042",CourseName="Literature"}
             };
             courses.ForEach(s => context.Courses.Add(s));
-            context.SaveChanges();
+            context.SaveChanges();*/
         }
     }
 }
