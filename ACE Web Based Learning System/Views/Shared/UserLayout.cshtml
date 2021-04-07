@@ -2,7 +2,7 @@
     @{ 
         var userContent = Session["UserContent"] as ACE_Web_Based_Learning_System.Models.UserContent;
         var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Course>;
-     
+        var userColor = userContent.Color ?? "black";
     }
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,7 @@ font-size: 18px;
              ; border-top-style:solid;
                border-width: 1px;
                padding-top: 10px;
-               color: gray;
+              
                border-color: lightgray;
                margin-top: 10px;
                cursor: pointer;
@@ -73,17 +73,17 @@ font-size: 18px;
 
                     <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <span class="material-icons">face</span>
+                            <span class="material-icons" style="color:@userColor">face</span>
 
                         </button>
                         <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdownMenu1">
                             <li>
                                 <div class="userCard">
                                     <div class="userInfo">
-                                        <span class="material-icons" style="font-size: 100px;">face</span>
+                                        <span class="material-icons" style="font-size: 100px; color: @userColor ">face</span>
                                         <div> @Model.FirstName  @Model.LastName</div>
 
-                                        <div style="color: lightgray"> @userContent.Email</div>
+                                        <div style="color: gray"> @userContent.Email</div>
                                     </div>
                                     <div id="manageButton" class="userButton">
                                         Manage your account settings
@@ -99,7 +99,7 @@ font-size: 18px;
             </div>
         </header>
         <div class="mdl-layout__drawer">
-            <span class="material-icons" style="font-size: 100px; text-align:center">face</span>
+            <span class="material-icons" style="font-size: 100px; text-align:center;color: @userColor">face</span>
             <div style="text-align:center; padding-bottom: 20px;  border-bottom-style: solid; border-width: 1px"> @Model.FirstName  @Model.LastName</div>
             
             <nav class="mdl-navigation">
@@ -128,7 +128,15 @@ font-size: 18px;
         document.getElementById("manageButton").addEventListener("click", function () {
 
 
-            window.location.href = "/Users/UserSettings";
+            window.location.href = "/User/UserSettings";
+
+
+
+        });
+        document.getElementById("signOutButton").addEventListener("click", function () {
+
+
+            window.location.href = "/User/LoginPage";
 
 
 

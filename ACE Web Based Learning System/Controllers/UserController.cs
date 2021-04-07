@@ -157,6 +157,239 @@ namespace ACE_Web_Based_Learning_System.Controllers
             return RedirectToAction("LoginPage", "User");
         }
 
+        public ActionResult editFirstName(string newName, string password)
+        {
+            
+            try
+            {
+                var sessionUser = Session["User"] as User;
+                var credentials = Session["UserCredentials"] as Credential;
+                if (password == credentials.Password)
+                {
+                    User user = db.User.Find(sessionUser.ID);
+                    User newUser = user;
+                    newUser.FirstName = newName;
+                    db.Entry(user).CurrentValues.SetValues(newUser);
+                 
+                    db.SaveChanges();
+                    Session["User"] = user;
+                    return Json(Url.Action("UserSettings", "User"));
+                }
+                else
+                {
+                    throw new Exception();
+                }
+               
+            }
+            catch
+            {
+                var loginresult = new JsonResult { Message = "bad" };
+                return Json(loginresult);               
+            }
+                
+        }
+
+        public ActionResult editLastName(string newName, string password)
+        {
+
+            try
+            {
+                var sessionUser = Session["User"] as User;
+                var credentials = Session["UserCredentials"] as Credential;
+                if (password == credentials.Password)
+                {
+                    User user = db.User.Find(sessionUser.ID);
+                    User newUser = user;
+                    newUser.LastName = newName;
+                    db.Entry(user).CurrentValues.SetValues(newUser);
+
+                    db.SaveChanges();
+                    Session["User"] = user;
+                    return Json(Url.Action("UserSettings", "User"));
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch
+            {
+                var loginresult = new JsonResult { Message = "bad" };
+                return Json(loginresult);
+            }
+
+        }
+        public ActionResult editEmail(string newEmail, string password)
+        {
+
+            try
+            {
+                var sessionUser = Session["User"] as User;
+                var credentials = Session["UserCredentials"] as Credential;
+                var sessionContent = Session["UserContent"] as UserContent;
+                if (password == credentials.Password)
+                {
+                    UserContent content = db.UserContent.Find(sessionContent.ID);
+                    UserContent newContent = content;
+                    newContent.Email = newEmail;
+                    db.Entry(content).CurrentValues.SetValues(newContent);
+
+                    db.SaveChanges();
+                   
+                    Session["UserContent"] = content;
+                    return Json(Url.Action("UserSettings", "User"));
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch
+            {
+                var loginresult = new JsonResult { Message = "bad" };
+                return Json(loginresult);
+            }
+
+        }
+
+        public ActionResult editGender(string newGender, string password)
+        {
+
+            try
+            {
+                var sessionUser = Session["User"] as User;
+                var credentials = Session["UserCredentials"] as Credential;
+                var sessionContent = Session["UserContent"] as UserContent;
+                if (password == credentials.Password)
+                {
+                    UserContent content = db.UserContent.Find(sessionContent.ID);
+                    UserContent newContent = content;
+                    newContent.Gender = newGender;
+                    db.Entry(content).CurrentValues.SetValues(newContent);
+
+                    db.SaveChanges();
+
+                    Session["UserContent"] = content;
+                    return Json(Url.Action("UserSettings", "User"));
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch
+            {
+                var loginresult = new JsonResult { Message = "bad" };
+                return Json(loginresult);
+            }
+
+        }
+
+        public ActionResult editAge(int newAge, string password)
+        {
+
+            try
+            {
+                var sessionUser = Session["User"] as User;
+                var credentials = Session["UserCredentials"] as Credential;
+                var sessionContent = Session["UserContent"] as UserContent;
+                if (password == credentials.Password)
+                {
+                    UserContent content = db.UserContent.Find(sessionContent.ID);
+                    UserContent newContent = content;
+                    newContent.Age = newAge;
+                    db.Entry(content).CurrentValues.SetValues(newContent);
+
+                    db.SaveChanges();
+
+                    Session["UserContent"] = content;
+                    return Json(Url.Action("UserSettings", "User"));
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch
+            {
+                var loginresult = new JsonResult { Message = "bad" };
+                return Json(loginresult);
+            }
+
+        }
+
+        public ActionResult editStatus(string newStatus, string password)
+        {
+
+            try
+            {
+                var sessionUser = Session["User"] as User;
+                var credentials = Session["UserCredentials"] as Credential;
+                var sessionContent = Session["UserContent"] as UserContent;
+                if (password == credentials.Password)
+                {
+                    UserContent content = db.UserContent.Find(sessionContent.ID);
+                    UserContent newContent = content;
+                    newContent.Status = newStatus;
+                    db.Entry(content).CurrentValues.SetValues(newContent);
+
+                    db.SaveChanges();
+
+                    Session["UserContent"] = content;
+                    return Json(Url.Action("UserSettings", "User"));
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch
+            {
+                var loginresult = new JsonResult { Message = "bad" };
+                return Json(loginresult);
+            }
+
+        }
+
+        public ActionResult editColor(string newColor, string password)
+        {
+
+            try
+            {
+                var sessionUser = Session["User"] as User;
+                var credentials = Session["UserCredentials"] as Credential;
+                var sessionContent = Session["UserContent"] as UserContent;
+                if (password == credentials.Password)
+                {
+                    UserContent content = db.UserContent.Find(sessionContent.ID);
+                    UserContent newContent = content;
+                    newContent.Color = newColor;
+                    db.Entry(content).CurrentValues.SetValues(newContent);
+
+                    db.SaveChanges();
+
+                    Session["UserContent"] = content;
+                    return Json(Url.Action("UserSettings", "User"));
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch
+            {
+                var loginresult = new JsonResult { Message = "bad" };
+                return Json(loginresult);
+            }
+
+        }
+
         public bool login(string username, string password)
         {
 
@@ -195,18 +428,18 @@ namespace ACE_Web_Based_Learning_System.Controllers
 
             if (login(email, password))
             {
-                var loginresult = new LoginResult { Message = "success" };
+                var loginresult = new JsonResult { Message = "success" };
                 return Json(Url.Action("Index", "Home"));
             }
             else
             {
-                var loginresult = new LoginResult { Message = "bad" };
+                var loginresult = new JsonResult { Message = "bad" };
                 return Json(loginresult);
 
             }
         }
     }
-    public class LoginResult
+    public class JsonResult
     {
         public string Message { get; set; }
 

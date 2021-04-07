@@ -1,6 +1,14 @@
-﻿@model ACE_Web_Based_Learning_System.Models.Users
+﻿
 @{
+    Layout = "~/Views/Shared/UserLayout.cshtml";
     ViewBag.Title = "UserSettings";
+    var userContent = ViewData["UserContent"] as ACE_Web_Based_Learning_System.Models.UserContent;
+    var credentials = ViewData["UserCredentials"] as ACE_Web_Based_Learning_System.Models.Credential;
+    var color = userContent.Color ?? "black";
+    var status = userContent.Status ?? "No user status, set one right now!";
+    var age = userContent.Age ?? 18;
+    var gender = userContent.Gender ?? "No gender, select one now!";
+   
 }
 <style>
     .panel-heading {
@@ -32,13 +40,37 @@
     <div class="panel panel-default">
         <div class="panel-heading"><div>Email</div> <button id="emailChange" class=" btn btn-xs btn-default"><span class="material-icons">mode</span></button></div>
         <div class="panel-body">
-            @Model.Email
+            @userContent.Email
         </div>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading"><div>Password</div> <button id="passChange" class=" btn btn-xs btn-default"><span class="material-icons">mode</span></button> </div>
         <div class="panel-body">
             *************************************
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><div>Color</div> <button id="colorChange" class=" btn btn-xs btn-default"><span class="material-icons">mode</span></button> </div>
+        <div class="panel-body">
+            @color
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><div>Status</div> <button id="statusChange" class=" btn btn-xs btn-default"><span class="material-icons">mode</span></button> </div>
+        <div class="panel-body" style="font-style:italic">
+            @status
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><div>Age</div> <button id="ageChange" class=" btn btn-xs btn-default"><span class="material-icons">mode</span></button> </div>
+        <div class="panel-body">
+            @age
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><div>Gender</div> <button id="genderChange" class=" btn btn-xs btn-default"><span class="material-icons">mode</span></button> </div>
+        <div class="panel-body">
+            @gender
         </div>
     </div>
 
@@ -61,7 +93,7 @@
         }).queue([
             {
                 title: 'New Name',
-                text: 'Enter your desired name'
+                text: 'Enter your desired first name'
             },
             {
                 title: 'Password',
@@ -69,25 +101,538 @@
             }
             
         ]).then((result) => {
-            
-                if (result.value[1] != "@Model.Password") {
+            fetch('/User/editFirstName?newName=' + result.value[0] + '&password=' + result.value[1], {
+                method: 'post',
+
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Change',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
+                    response.json().then(function (data) {
+                        if (data.Message == null) {
+                            Swal.fire({
+
+                                icon: 'success',
+                                title: 'Successful Change',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
+
+                        }
+
+                        else {
+                            Swal.fire({
+
+                                icon: 'error',
+                                title: 'Unsuccessful Change',
+                                showConfirmButton: true,
+
+                            })
+                        }
+
+                    });
+                })
+                .catch(function (err) {
                     Swal.fire({
+
                         icon: 'error',
-                        title: 'Incorrect Password',
+                        title: 'Unsuccessful Change',
                         showConfirmButton: true,
 
-                    });
-                }
-                else {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful Change',
-                        showConfirmButton: true,
-
-                    });
-                }
+                    })
+                });
+          
             
             
         })
     });
+    document.getElementById("lNameChange").addEventListener("click", function () {
+
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+            {
+                title: 'New Name',
+                text: 'Enter your desired last name'
+            },
+            {
+                title: 'Password',
+                text: 'Enter your password'
+            }
+
+        ]).then((result) => {
+            fetch('/User/editLastName?newName=' + result.value[0] + '&password=' + result.value[1], {
+                method: 'post',
+
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Change',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
+                    response.json().then(function (data) {
+                        if (data.Message == null) {
+                            Swal.fire({
+
+                                icon: 'success',
+                                title: 'Successful Change',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
+
+                        }
+
+                        else {
+                            Swal.fire({
+
+                                icon: 'error',
+                                title: 'Unsuccessful Change',
+                                showConfirmButton: true,
+
+                            })
+                        }
+
+                    });
+                })
+                .catch(function (err) {
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: 'Unsuccessful Change',
+                        showConfirmButton: true,
+
+                    })
+                });
+
+
+
+        })
+    });
+    document.getElementById("statusChange").addEventListener("click", function () {
+
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+            {
+                title: 'New Status',
+                text: 'Enter your desired status'
+            },
+            {
+                title: 'Password',
+                text: 'Enter your password'
+            }
+
+        ]).then((result) => {
+            fetch('/User/editStatus?newStatus=' + result.value[0] + '&password=' + result.value[1], {
+                method: 'post',
+
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Change',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
+                    response.json().then(function (data) {
+                        if (data.Message == null) {
+                            Swal.fire({
+
+                                icon: 'success',
+                                title: 'Successful Change',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
+
+                        }
+
+                        else {
+                            Swal.fire({
+
+                                icon: 'error',
+                                title: 'Unsuccessful Change',
+                                showConfirmButton: true,
+
+                            })
+                        }
+
+                    });
+                })
+                .catch(function (err) {
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: 'Unsuccessful Change',
+                        showConfirmButton: true,
+
+                    })
+                });
+
+
+
+        })
+    });
+
+    document.getElementById("emailChange").addEventListener("click", function () {
+
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+            {
+                title: 'New Email',
+                text: 'Enter your desired email'
+            },
+            {
+                title: 'Password',
+                text: 'Enter your password'
+            }
+
+        ]).then((result) => {
+            fetch('/User/editEmail?newEmail=' + result.value[0] + '&password=' + result.value[1], {
+                method: 'post',
+
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Change',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
+                    response.json().then(function (data) {
+                        if (data.Message == null) {
+                            Swal.fire({
+
+                                icon: 'success',
+                                title: 'Successful Change',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
+
+                        }
+
+                        else {
+                            Swal.fire({
+
+                                icon: 'error',
+                                title: 'Unsuccessful Change',
+                                showConfirmButton: true,
+
+                            })
+                        }
+
+                    });
+                })
+                .catch(function (err) {
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: 'Unsuccessful Change',
+                        showConfirmButton: true,
+
+                    })
+                });
+
+
+
+        })
+    });
+
+
+    document.getElementById("genderChange").addEventListener("click", function () {
+
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+            {
+                title: 'New Gender',
+                input: 'select',
+                inputOptions: {
+                    'Gender': {
+                        Male: 'Male',
+                        Female: 'Female',
+                        Other: 'Other',
+
+                    },
+                }
+            },
+            {
+                title: 'Password',
+                text: 'Enter your password'
+            }
+
+        ]).then((result) => {
+            console.log(result.value[0]);
+            fetch('/User/editGender?newGender=' + result.value[0] + '&password=' + result.value[1], {
+                method: 'post',
+
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Change',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
+                    response.json().then(function (data) {
+                        if (data.Message == null) {
+                            Swal.fire({
+
+                                icon: 'success',
+                                title: 'Successful Change',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
+
+                        }
+
+                        else {
+                            Swal.fire({
+
+                                icon: 'error',
+                                title: 'Unsuccessful Change',
+                                showConfirmButton: true,
+
+                            })
+                        }
+
+                    });
+                })
+                .catch(function (err) {
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: 'Unsuccessful Change',
+                        showConfirmButton: true,
+
+                    })
+                });
+
+
+
+        })
+    });
+
+    document.getElementById("colorChange").addEventListener("click", function () {
+
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+            {
+                title: 'New Color',
+                input: 'select',
+                inputOptions: {
+                    'Color': {
+                        Grey: 'Grey',
+                        Black: 'Black',
+                        Red: 'Red',
+                        Green: 'Green',
+                        Yellow: 'Yellow',
+                        Blue: 'Blue',
+
+                    },
+                }
+            },
+            {
+                title: 'Password',
+                text: 'Enter your password'
+            }
+
+        ]).then((result) => {
+            console.log(result.value[0]);
+            fetch('/User/editColor?newColor=' + result.value[0] + '&password=' + result.value[1], {
+                method: 'post',
+
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Change',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
+                    response.json().then(function (data) {
+                        if (data.Message == null) {
+                            Swal.fire({
+
+                                icon: 'success',
+                                title: 'Successful Change',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
+
+                        }
+
+                        else {
+                            Swal.fire({
+
+                                icon: 'error',
+                                title: 'Unsuccessful Change',
+                                showConfirmButton: true,
+
+                            })
+                        }
+
+                    });
+                })
+                .catch(function (err) {
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: 'Unsuccessful Change',
+                        showConfirmButton: true,
+
+                    })
+                });
+
+
+
+        })
+    });
+
+    document.getElementById("ageChange").addEventListener("click", function () {
+
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+            {
+                title: 'New Age',
+                input: 'select',
+                inputOptions: {
+                    'Age': {
+                        15: '15',
+                        16: '16',
+                        17: '17',
+                        18: '18',
+                        19: '19',
+                        20: '20',
+                        21: '21',
+                        22: '22',
+
+                    },
+                }
+            },
+            {
+                title: 'Password',
+                text: 'Enter your password'
+            }
+
+        ]).then((result) => {
+            console.log(result.value[0]);
+            fetch('/User/editAge?newAge=' + result.value[0] + '&password=' + result.value[1], {
+                method: 'post',
+
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: 'Unsuccessful Change',
+                            showConfirmButton: true,
+
+                        })
+                    }
+
+                    response.json().then(function (data) {
+                        if (data.Message == null) {
+                            Swal.fire({
+
+                                icon: 'success',
+                                title: 'Successful Change',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
+
+                        }
+
+                        else {
+                            Swal.fire({
+
+                                icon: 'error',
+                                title: 'Unsuccessful Change',
+                                showConfirmButton: true,
+
+                            })
+                        }
+
+                    });
+                })
+                .catch(function (err) {
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: 'Unsuccessful Change',
+                        showConfirmButton: true,
+
+                    })
+                });
+
+
+
+        })
+    });
+    
 </script>

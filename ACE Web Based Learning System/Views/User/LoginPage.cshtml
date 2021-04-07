@@ -147,7 +147,13 @@
         })
             .then(function (response) {
                 if (response.status !== 200) {
-                    console.log('fetch returned not ok' + response.status);
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: 'Unsuccessful Login',
+                        showConfirmButton: true,
+
+                    })
                 }
 
                 response.json().then(function (data) {
@@ -177,7 +183,13 @@
                 });
             })
             .catch(function (err) {
-                console.log(`error: ${err}`);
+                Swal.fire({
+
+                    icon: 'error',
+                    title: 'Unsuccessful Login',
+                    showConfirmButton: true,
+
+                })
             });
     });
 </script>
