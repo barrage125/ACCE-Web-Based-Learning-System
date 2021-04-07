@@ -147,11 +147,11 @@ namespace ACE_Web_Based_Learning_System.Controllers
         // GET: Users/UserSettings
         public ActionResult UserSettings()
         {
-            if (Session["UserID"] != null)
+            if (Session["User"] != null)
             {
                 ViewData["UserContent"] = Session["UserContent"];
                 ViewData["UserCredentials"] = Session["UserCredentials"];
-                return View(Session["UserID"] as User);
+                return View(Session["User"] as User);
             }
 
             return RedirectToAction("LoginPage", "User");
@@ -173,11 +173,17 @@ namespace ACE_Web_Based_Learning_System.Controllers
             {
                 return false;
             }
-            var d = Convert.ToInt32(users[0].UserID);
-            var courses = db.Enrollment.Where(i => i.UserID == d).ToList();
-            Console.WriteLine(courses[0].Section.Course.CourseName);
+            var userID = Convert.ToInt32(users[0].UserID);
+            var enrollments = db.Enrollment.Where(i => i.UserID == userID).ToList();
+            var courses = new List<Course>();
+            foreach (var enroll in enrollments)
+            {
+                courses.Add(enroll.Section.Course);
+            }
             Session["Courses"] = courses;
-            Session["UserID"] = users[0].User;
+
+
+            Session["User"] = users[0].User;
            
             Session["UserContent"] = userCotnent[0];
             Session["UserCredentials"] = users[0];

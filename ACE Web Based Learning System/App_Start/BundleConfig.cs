@@ -27,6 +27,10 @@ namespace ACE_Web_Based_Learning_System
                       "~/Content/bootstrap.css",
                       "~/Content/material.min.css"
                   ));
+            bundles.Add(new StyleBundle("~/Material/css").Include(
+                      
+                      "~/Content/material.min.css"
+                  ));
         }
     }
 }

@@ -197,11 +197,11 @@
     <Content Include="Views\User\UserSettings.cshtml" />
     <Content Include="Views\User\UserSignup.cshtml" />
     <Content Include="Views\User1\Index.cshtml" />
-    <Content Include="Views\Courses\Create.cshtml" />
-    <Content Include="Views\Courses\Delete.cshtml" />
-    <Content Include="Views\Courses\Details.cshtml" />
-    <Content Include="Views\Courses\Edit.cshtml" />
-    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\Course\Delete.cshtml" />
+    <Content Include="Views\Course\Details.cshtml" />
+    <Content Include="Views\Course\Edit.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\CourseContent\Create.cshtml" />
     <Content Include="Views\CourseContent\Delete.cshtml" />
     <Content Include="Views\CourseContent\Details.cshtml" />
@@ -219,6 +219,7 @@
     <Content Include="Views\UserContent\Index.cshtml" />
     <Content Include="Scripts\material.min.js.map" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
+    <Content Include="Views\Course\CourseView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

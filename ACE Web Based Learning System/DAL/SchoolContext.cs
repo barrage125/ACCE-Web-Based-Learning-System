@@ -13,8 +13,10 @@ namespace ACE_Web_Based_Learning_System.DAL
 
     public class SchoolContext : DbContext
     {
+
         public SchoolContext() : base("name=SchoolContext")
         {
+         
         }
         public DbSet<CourseContent> CourseContent { get; set; }
         public DbSet<Course> Course { get; set; }

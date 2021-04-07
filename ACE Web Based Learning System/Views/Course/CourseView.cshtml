@@ -1,0 +1,108 @@
+﻿@using System.Text.RegularExpressions;
+
+@{
+    var section = ViewData["section"] as ACE_Web_Based_Learning_System.Models.Section;
+    var capacity = section.Capacity;
+    var sectionID = section.ID;
+    sectionID = Regex.Replace(sectionID, "[A-Za-z ]", "");
+    var enrolledCourse = section.Course.CourseName;
+    var students = section.enrollments;
+    var userContent = Session["UserContent"] as ACE_Web_Based_Learning_System.Models.UserContent;
+    var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Course>
+    ;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs" ">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">@enrolledCourse @sectionID</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="material-icons">face</span>
+
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdownMenu1">
+                            <li>
+                                <div class="userCard">
+                                    <div class="userInfo">
+                                        <span class="material-icons" style="font-size: 100px;">face</span>
+                                        <div> @Model.FirstName  @Model.LastName</div>
+
+                                        <div style="color: lightgray"> @userContent.Email</div>
+                                    </div>
+                                    <div id="manageButton" class="userButton">
+                                        Manage your account settings
+                                    </div>
+                                    <div id="signOutButton" class="userButton">
+                                        Sign out
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Content</a>
+                <a href="#fixed-tab-2" class="mdl-layout__tab">Grades</a>
+                <a href="#fixed-tab-3" class="mdl-layout__tab">Students</a>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="material-icons" style="font-size: 100px; text-align:center">face</span>
+            <div style="text-align:center; padding-bottom: 20px;  border-bottom-style: solid; border-width: 1px"> @Model.FirstName  @Model.LastName</div>
+
+            <nav class="mdl-navigation">
+                @foreach (var course in courses)
+                {
+                    <a class="mdl-navigation__link" href="/Course/CourseView?courseNumber=@course.CourseNo"><span class="mdl-badge" data-badge="4">@course.CourseName</span></a>
+                }
+
+
+
+
+
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+                <div class="page-content">
+                    <h1> Welcome to @enrolledCourse! </h1>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+                <div class="page-content">This is where grades will go!</div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+                <div class="page-content">
+                    <div style="width: 100%; display: flex; flex-direction:row; justify-content:space-around">
+                        <h3> Students</h3>
+                        <h3> @students.Count / @capacity</h3>
+                    </div>
+                    <ul class="demo-list-icon mdl-list">
+                        @foreach (var enrollment in students)
+                        {
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                    @enrollment.User.FirstName @enrollment.User.LastName
+                                </span>
+                            </li>
+                        }
+
+
+                    </ul>
+                </div>
+            </section>
+
+
+
+        </main>

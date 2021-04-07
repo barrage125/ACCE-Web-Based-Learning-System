@@ -13,9 +13,9 @@ namespace ACE_Web_Based_Learning_System.Controllers
         public ActionResult Index()
         {
 
-            if (Session["UserID"] != null)
+            if (Session["User"] != null)
             {
-                return View(Session["UserID"] as User);
+                return View(Session["User"] as User);
             }
 
             return RedirectToAction("LoginPage", "User");
@@ -25,9 +25,9 @@ namespace ACE_Web_Based_Learning_System.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            if (Session["UserID"] != null)
+            if (Session["User"] != null)
             {
-                return View(Session["UserID"] as User);
+                return View(Session["User"] as User);
             }
 
             return RedirectToAction("LoginPage", "User");
@@ -37,9 +37,9 @@ namespace ACE_Web_Based_Learning_System.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            if (Session["UserID"] != null)
+            if (Session["User"] != null)
             {
-                return View(Session["UserID"] as User);
+                return View(Session["User"] as User);
             }
 
             return RedirectToAction("LoginPage", "User");

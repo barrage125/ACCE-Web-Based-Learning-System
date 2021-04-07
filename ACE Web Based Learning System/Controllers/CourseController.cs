@@ -21,6 +21,24 @@ namespace ACE_Web_Based_Learning_System.Controllers
             return View(db.Course.ToList());
         }
 
+        public ActionResult CourseView(String courseNumber)
+        {
+            //really bad code
+            var course = db.Course.Where(i => i.CourseNo == courseNumber).ToList();
+            var user = Session["User"] as ACE_Web_Based_Learning_System.Models.User;
+            Section enrolledSection = null;
+            foreach (var section in course[0].Sections)
+            {
+                var enrolledSections = section.enrollments.Where(i => i.UserID == user.ID).ToList();
+                if (enrolledSections.Count > 0)
+                {
+                    enrolledSection = section as Section;
+                }
+                
+            }
+            ViewData["Section"] = enrolledSection;
+            return View(user);
+        }
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {

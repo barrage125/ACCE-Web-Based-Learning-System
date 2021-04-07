@@ -1,7 +1,8 @@
 ﻿@model ACE_Web_Based_Learning_System.Models.User
     @{ 
         var userContent = Session["UserContent"] as ACE_Web_Based_Learning_System.Models.UserContent;
-        var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Enrollment>;
+        var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Course>;
+     
     }
 <!DOCTYPE html>
 <html>
@@ -50,6 +51,10 @@ font-size: 18px;
                margin-top: 10px;
                cursor: pointer;
         }
+
+        .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+            color: black !important;
+        }
     </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -94,12 +99,18 @@ font-size: 18px;
             </div>
         </header>
         <div class="mdl-layout__drawer">
-
+            <span class="material-icons" style="font-size: 100px; text-align:center">face</span>
+            <div style="text-align:center; padding-bottom: 20px;  border-bottom-style: solid; border-width: 1px"> @Model.FirstName  @Model.LastName</div>
+            
             <nav class="mdl-navigation">
+                @foreach (var course in courses)
+                {
+                    <a class="mdl-navigation__link" href="/Course/CourseView?courseNumber=@course.CourseNo"><span class="mdl-badge" data-badge="4">@course.CourseName</span></a>
+                }
 
-                <a class="mdl-navigation__link" href="">@courses[0].Section.Course.CourseName</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
+
+
+
 
             </nav>
         </div>
@@ -108,7 +119,6 @@ font-size: 18px;
         </main>
     </div>
    
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
