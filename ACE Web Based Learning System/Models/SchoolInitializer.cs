@@ -7,7 +7,7 @@ using ACE_Web_Based_Learning_System.DAL;
 
 namespace ACE_Web_Based_Learning_System.Models
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext> //Change IfModelChanges to Always to force db rebuild
+    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseAlways<SchoolContext> //Change IfModelChanges to Always to force db rebuild
     {
         
         protected override void Seed(SchoolContext context)
@@ -10033,6 +10033,16 @@ namespace ACE_Web_Based_Learning_System.Models
 
 
             }
+
+            var testUser = new User { FirstName="Test",LastName="User"};
+            var testCredential = new Credential { ID = "test", Password = "test", UserID = testUser.ID, User = testUser };
+            var testContent = new UserContent { Email = testUser.FirstName + testUser.LastName + "@gmail.com", UserID = testUser.ID, User = testUser };
+            testUser.Credential = testCredential;
+            testUser.UserContent = testContent;
+            context.User.Add(testUser);
+            context.Credential.Add(testCredential);
+            context.UserContent.Add(testContent);
+
             context.SaveChanges();
 
 
