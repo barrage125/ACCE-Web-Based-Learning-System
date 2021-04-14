@@ -11,8 +11,12 @@
     var userColor = userContent.Color ?? "Black";
     var courses = Session["Courses"] as List<ACE_Web_Based_Learning_System.Models.Course>
     ;
-
+    var courseContent = ViewData["CourseContent"] as List<ACE_Web_Based_Learning_System.Models.CourseContent>;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = 0;
+
+    var tests = ViewData["Tests"] as List<TestQuestions>;
+    var testsAttempts = ViewData["TestsAttempts"] as List<ACE_Web_Based_Learning_System.Models.TestAttempt>;
     }
 <style>
     .mdl-list__item:hover {
@@ -117,10 +121,92 @@
         <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
             <div class="page-content">
                 <h1> Welcome to @enrolledCourse! </h1>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                     
+                        @foreach (var content in courseContent)
+                        {
+                            i++;
+                                    <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#@i">
+                                    Course Material #@i
+                                </a>
+                            </h4>
+                        </div>
+                        <div id = "@i" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @content.Content
+                            </div>
+                        </div>
+             
+                        }
+
+
+
+                </div>
             </div>
+                </div>
         </section>
         <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-            <div class="page-content">This is where grades will go!</div>
+            <div class="page-content">
+                <div class="panel-group" id="accordion1">
+                    <div class="panel panel-default">
+
+                        @for (int j = 0; j < tests.Count; j++)
+
+                        {
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="text-align:center">
+                                    <a data-toggle="collapse" aria-expanded="false" data-parent="#accordion1" href="#@(j+1000)" class="collapsed">
+                                        Test #@j
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="@(j+1000)" aria-expanded="false" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <button class="testQuestion" onclick="takeTest(@j)">
+                                        Take Test
+                                    </button>
+                                </div>
+                            </div>
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+                <div class="panel-group" id="accordion2">
+                    <div class="panel panel-default">
+
+                        @for (int k = 0; k < testsAttempts.Count; k++)
+
+                        {
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="text-align:center">
+                                    <a data-toggle="collapse" aria-expanded="false" data-parent="#accordion2" href="#@(k+5000)" class="collapsed">
+                                        Test #@k
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="@(k+5000)" aria-expanded="false" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                   @testsAttempts[k].ANSWERS
+                                </div>
+                            </div>
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
         </section>
         <section class="mdl-layout__tab-panel" id="fixed-tab-3">
             <div class="page-content">
@@ -189,5 +275,10 @@
                 focusConfirm: false,
 
             })
-                }
+        }
+        function takeTest(j)
+        {
+            window.location.href = "TestView?courseNumber=" + @courseContent[0].Course.CourseNo + "&testNo=" + j;
+            
+        }
     </script>

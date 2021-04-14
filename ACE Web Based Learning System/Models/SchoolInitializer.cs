@@ -10006,7 +10006,7 @@ namespace ACE_Web_Based_Learning_System.Models
             };
             section.ForEach(s => context.Section.Add(s));
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 5; i++)
             {
 
                 var tempUser = new User();
@@ -10022,10 +10022,12 @@ namespace ACE_Web_Based_Learning_System.Models
                 context.User.Add(tempUser);
                 context.Credential.Add(credential);
                 context.UserContent.Add(content);
+                
                 for (int j = 0; j < randoNum4; j++)
                 {
                    var x = new Enrollment { Type = "Test", User = tempUser, Section = section[j], UserID = (i + 1), SectionID = section[j].ID };
                     context.Enrollment.Add(x);
+                    
                 }
                
 

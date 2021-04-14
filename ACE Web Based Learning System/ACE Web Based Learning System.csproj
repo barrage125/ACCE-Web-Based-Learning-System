@@ -220,6 +220,7 @@
     <Content Include="Scripts\material.min.js.map" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
     <Content Include="Views\Course\CourseView.cshtml" />
+    <Content Include="Views\Course\TestView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
