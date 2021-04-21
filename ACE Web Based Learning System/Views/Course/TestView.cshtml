@@ -3,78 +3,98 @@
     ViewBag.Title = "TestView";
     Layout = "~/Views/Shared/UserLayout.cshtml";
     var test = ViewData["Test"] as TestQuestions;
-   
+
 }
 
 
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
 
-                @for (int j = 0; j < test.questions.Count; j++)
+        @for (int j = 0; j < test.questions.Count; j++)
 
-                {
-                    <div class="panel-heading">
-                        <h4 class="panel-title" style="text-align:center">
-                            <a data-toggle="collapse" aria-expanded="false" data-parent="#accordion" href="#@(j)" class="collapsed">
-                                Question #@j
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="@(j)" aria-expanded="false" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @test.questions[j].question
+        {
+            <div class="panel-heading">
+                <h4 class="panel-title" style="text-align:center">
+                    <a data-toggle="collapse" aria-expanded="false" data-parent="#accordion" href="#@(j)" class="collapsed">
+                        Question #@(j+1)
+                    </a>
+                </h4>
+            </div>
+            <div id="@(j)" aria-expanded="false" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @test.questions[j].question
+                </div>
+                <div style="display:flex; flex-direction:column; width:100%; ">
+                    @for (int k = 0; k < test.questions[j].answers.Count; k++)
+                    {
+                        <div style="max-width: 25%; align-self:center;">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-@j-@k">
+                                <input type="radio" id="option-@j-@k" class="mdl-radio__button" name="options" onclick="(answers[@j] = @k)">
+                                <span class="mdl-radio__label">@test.questions[j].answers[k].answer</span>
+                            </label>
                         </div>
-                        <div style="display:flex; flex-direction:column; width:100%; ">
-                            @for (int k = 0; k < test.questions[j].answers.Count; k++)
-                            {
-                            <div style="max-width: 25%; align-self:center;">
-                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-@j-@k">
-                                    <input type="radio" id="option-@j-@k" class="mdl-radio__button" name="options" onclick="(answers[@j] = @k)">
-                                    <span class="mdl-radio__label">@test.questions[j].answers[k].answer</span>
-                                </label>
-                            </div>
-                            }
-                        </div>
-                      
-                    </div>
-                }
-
-
-
-                <button onclick="checkAnswers()"> Submit</button>
+                    }
+                </div>
 
             </div>
-        </div>
-        <script>
+        }
+
+
+
+
+
+    </div>
+</div>
+<div style="display:flex; justify-content:center">
+    <button class="btn btn-primary btn-lg" onclick="checkAnswers()"> Submit</button>
+</div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
             var answers = [];
             var i;
      for (i = 0; i < @test.questions.Count; i++)
         {
             answers.push(0);
-        }
-            function checkAnswers() {
+    }
+
+    function checkAnswers() {
+                 Swal.showLoading();
                 const urlParams = new URLSearchParams(window.location.search);
                 const courseNo = urlParams.get('courseNumber');
                 const testNo = urlParams.get('testNo');
-              
-               
+
+
                 fetch('/Course/CheckAnswer?courseNumber=' + courseNo + '&testNo=' + testNo + '&answers=' + answers, {
                     method: 'post',
-                   
+
                 })
                     .then(function (response) {
                         if (response.status !== 200) {
+                            Swal.fire({
 
+                                icon: 'error',
+                                title: 'Successful Login',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location.href = data;
+                            })
                         }
 
                         response.json().then(function (data) {
 
+                            Swal.fire({
 
+                                icon: 'success',
+                                title: 'Successful Attempt. Reload page',
+                                showConfirmButton: true,
+                                timer: 1500
+                            })
                         });
                     });
                 }
-            
-        </script>
+
+</script>
 
 
 

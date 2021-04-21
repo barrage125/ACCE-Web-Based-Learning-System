@@ -17,55 +17,82 @@ namespace ACE_Web_Based_Learning_System.Controllers
         private SchoolContext db = new SchoolContext();
 
         // GET: Courses
-        public ActionResult Index()
-        {
-            return View(db.Course.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    return View(db.Course.ToList());
+        //}
 
         public ActionResult CourseView(String courseNumber)
         {
             //really bad code
-            var course = db.Course.Where(i => i.CourseNo == courseNumber).ToList();
-            var user = Session["User"] as ACE_Web_Based_Learning_System.Models.User;
-            
-            Section enrolledSection = null;
-
-            foreach (var section in course[0].Sections)
+            //singleordefault will only grab if there is a single element in the databsae
+            //if more than one or zero is found, then it will throw an exception
+            //using statement automatically disposes after use
+            using (SchoolContext dbContext = new SchoolContext())
             {
-                var enrolledSections = section.enrollments.Where(i => i.UserID == user.ID).ToList();
-                if (enrolledSections.Count > 0)
+                var course = db.Course.SingleOrDefault(i => i.CourseNo == courseNumber);
+                var user = Session["User"] as ACE_Web_Based_Learning_System.Models.User;
+
+                Section enrolledSection = null;
+
+                //go through ALL of the course sections and find the section teh user is enrolled in
+                //not the best way but all other ways cause disposing issues that were not resolved
+                //this works but is not the best way for abstraction/encapsulation purposes
+                //best way is to pass in enrollmentID as the parameter so we know the enrollement already. this way causes issues with presenting the user courses in the nav bar
+                //and no workaround has been found
+
+                foreach (var section in course.Sections)
                 {
-                    enrolledSection = section as Section;
+                    //!!!! IMPORTANT !!!!
+                    //USERS SHOULD ONLY BE ENROLLED IN ONE COURSE
+                    //IF NOT, THIS CODE WILL FAIL all the time
+                    
+
+                    var enrolledSections = section.enrollments.Where(i => i.UserID == user.ID).ToList();
+                    //if enrollement found, then section is enrolled section
+                    if (enrolledSections.Count > 0)
+                    {
+                        enrolledSection = section as Section;
+                    }
+
                 }
-                
-            }
-            var testList = course[0].Tests.ToList();
-            var attemptedTests = new List<TestAttempt>();
-            foreach (var test1 in testList)
-            {
-                var g = db.TestAttempt.Where(i => i.TestID == test1.ID).ToList();
-                var h = g.Where(i => i.UserID == user.ID).ToList();
-                if (h.Count > 0)
+
+
+                var testList = course.Tests.ToList();
+                //test list
+                //finds attempts for ANY tests
+               
+                var attemptedTests = new List<TestAttempt>();
+                var userTestsTaken = dbContext.TestAttempt.Where(i => i.UserID == user.ID).ToList();
+                foreach (var exam in testList)
                 {
-                    attemptedTests.Add(h[0]);
+                    //finds tests attempts for this specific exam 
+                    //could be done other way (find tests attempts for specific exam and then user taken)
+                    //done this way because it is presumed to be more efficient (instead of having all the test attempts for a certain test loaded up at once)
+                    var userAttemptsonExam = userTestsTaken.Where(i => i.TestID == exam.ID).ToList();
+                    if (userAttemptsonExam.Count > 0)
+                    {
+                        attemptedTests.Add(userAttemptsonExam[0]);
+                    }
+
                 }
 
-            }    
-          
-            var testListDeserialized = new List<TestQuestions>();
+                var testListDeserialized = new List<TestQuestions>();
 
-            foreach(var test in testList)
-            {
-                var tempTest = JsonConvert.DeserializeObject<TestQuestions>(test.QUESTIONS);
-                testListDeserialized.Add(tempTest);
+                foreach (var test in testList)
+                {
+                    //test questions in JSON format, has to deserialize
+                    var tempTest = JsonConvert.DeserializeObject<TestQuestions>(test.QUESTIONS);
+                    testListDeserialized.Add(tempTest);
+                }
+
+                ViewData["Section"] = enrolledSection;
+               
+                ViewData["CourseContent"] = enrolledSection.Course.CourseContents.ToList() as List<ACE_Web_Based_Learning_System.Models.CourseContent>;
+                ViewData["Tests"] = testListDeserialized;
+                ViewData["TestsAttempts"] = attemptedTests;
+                return View(user);
             }
-            
-            ViewData["Section"] = enrolledSection;
-            var x = enrolledSection.Course.CourseContents.ToList() as List<ACE_Web_Based_Learning_System.Models.CourseContent>;
-            ViewData["CourseContent"] = x;
-            ViewData["Tests"] = testListDeserialized;
-            ViewData["TestsAttempts"] = attemptedTests;
-            return View(user);
         }
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
