@@ -6,22 +6,10 @@
     <title>@ViewBag.Title</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css" />
 
-    <!-- Optional theme -->
-   
-    
-    <!-- I notice that the signup page only renders correctly when I import the bootstrap stylesheets manually
-         rather than using the format below. Also, I'm not sure how to determine the order of the pages like 
-         starting from the Login and then going to the home page, so hopefully you have better luck with it than I did. -->
-    
-@Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>
-        a:hover, a:focus {
-            color: white !important;
-            text-decoration: none !important;
-        }
-    </style>
 </head>
 <body>
 

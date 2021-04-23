@@ -4,9 +4,9 @@
     ViewBag.Title = "ACE - Learning Management System";
 }
 
-
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
+
 <style>
     body {
         font-family: "Lato", sans-serif;
@@ -20,6 +20,10 @@
         color: black;
     }
 
+    a, a:hover, a:focus {
+        color: #f44336;
+    }
+
     .main-head {
         height: 150px;
         background: #FFF;
@@ -27,7 +31,7 @@
 
     .sidenav {
         height: 100%;
-        background-color: rgb(63,81,181);
+        background-color: #343d52;
         overflow-x: hidden;
         padding-top: 20px;
     }
@@ -41,7 +45,6 @@
             padding-top: 15px;
         }
     }
-
 
     @@media screen and (max-width: 450px) {
         .login-form {
@@ -75,69 +78,59 @@
         }
     }
 
-
     .login-main-text {
         margin-top: 20%;
         padding: 60px;
         color: #fff;
     }
 
-        .login-main-text h2 {
-            font-weight: 300;
-        }
-
-    .btn-black {
-        background-color: #000 !important;
-        color: #fff;
+    .login-main-text h2 {
+        font-weight: 300;
     }
 </style>
+
 <div class="sidenav">
+    <!-- Login Text -->
     <div class="login-main-text">
         <h1>ACE</h1>
         <h3>Learning Management System</h3>
         <p style="color:white">Login or register from here to access.</p>
     </div>
 </div>
-
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-
+            <!-- Email Input -->
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="emailInput">
-                <label class="mdl-textfield__label" for="emailInput">Email</label>
+                <label style="color: #343d52;" class="mdl-textfield__label" for="emailInput">Email</label>
                 <span class="mdl-textfield__error">Must not be empty!</span>
             </div>
+            <!-- Password Input -->
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="passwordInput">
-                <label class="mdl-textfield__label" for="passwordInput">Password</label>
+                <input class="mdl-textfield__input" type="password" id="passwordInput">
+                <label style="color: #343d52;" class="mdl-textfield__label" for="passwordInput">Password</label>
                 <span class="mdl-textfield__error">Must not be empty!</span>
             </div>
-            <br />
-            <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                Login
-            </button>
+            <!-- Submission Button -->
+            <button id="submit" style="background-color: #f44336;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
+            <!-- Forgotten Password -->
             <a href="EmailConfirmation.html">Forgot Password?</a>
             <br><br>
+            <!-- Account Signup -->
             <p>Don't have an account? Sign up <a href="SignUp.html">here</a>.</p>
-
         </div>
     </div>
-
 </div>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
-
     //DO NOT KEEP THIS HERE, ADD TO BUNDLE
     document.getElementById("submit").addEventListener("click", function () {
-
         var email = document.getElementById("emailInput").value;
-
         var password = document.getElementById("passwordInput").value;
-
 
         Swal.showLoading()
 
@@ -148,18 +141,15 @@
             .then(function (response) {
                 if (response.status !== 200) {
                     Swal.fire({
-
                         icon: 'error',
                         title: 'Unsuccessful Login',
                         showConfirmButton: true,
-
                     })
                 }
 
                 response.json().then(function (data) {
                     if (data.Message == null) {
                         Swal.fire({
-
                             icon: 'success',
                             title: 'Successful Login',
                             showConfirmButton: false,
@@ -167,28 +157,21 @@
                         }).then((result) => {
                             window.location.href = data;
                         })
-
                     }
-
                     else {
                         Swal.fire({
-
                             icon: 'error',
                             title: 'Unsuccessful Login',
                             showConfirmButton: true,
-
                         })
                     }
-
                 });
             })
             .catch(function (err) {
                 Swal.fire({
-
                     icon: 'error',
                     title: 'Unsuccessful Login',
                     showConfirmButton: true,
-
                 })
             });
     });
