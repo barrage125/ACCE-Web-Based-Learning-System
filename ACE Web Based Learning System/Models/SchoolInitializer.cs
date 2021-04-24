@@ -7,12 +7,18 @@ using ACE_Web_Based_Learning_System.DAL;
 
 namespace ACE_Web_Based_Learning_System.Models
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext> //Change IfModelChanges to Always to force db rebuild
+    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseAlways<SchoolContext> //Change IfModelChanges to Always to force db rebuild
     {
 
         protected override void Seed(SchoolContext context)
         {
-            var names = new String[] {"Aaren"
+            if (context.User.Any())
+            {
+                return;
+            }
+            else
+            {
+                var names = new String[] {"Aaren"
 ,
 "Aarika"
 ,
@@ -9904,7 +9910,7 @@ namespace ACE_Web_Based_Learning_System.Models
 ,
 "Zuzana"
             }
-;
+    ;
 
 
 
@@ -9913,17 +9919,17 @@ namespace ACE_Web_Based_Learning_System.Models
 
 
 
-            var department = new List<Department>
+                var department = new List<Department>
             {
                 new Department{ID="TestDepartment"}
             };
-            department.ForEach(s => context.Department.Add(s));
+                department.ForEach(s => context.Department.Add(s));
 
 
 
 
 
-            var courses = new List<Course>
+                var courses = new List<Course>
             {
             new Course{CourseNo="1050",CourseName="Chemistry", Department = department[0], DepartmentID=department[0].ID},
             new Course{CourseNo="4022",CourseName="Microeconomics", Department = department[0],DepartmentID=department[0].ID},
@@ -9942,10 +9948,10 @@ namespace ACE_Web_Based_Learning_System.Models
             new Course{CourseNo="5212",CourseName="Composition",Department = department[0],DepartmentID=department[0].ID},
             new Course{CourseNo="1233",CourseName="Literature",Department = department[0],DepartmentID=department[0].ID},
             };
-            courses.ForEach(s => context.Course.Add(s));
+                courses.ForEach(s => context.Course.Add(s));
 
 
-            var courseContent = new List<CourseContent>
+                var courseContent = new List<CourseContent>
             {
             new CourseContent{Content="1050", Course=courses[0], CourseID= courses[0].ID},
             new CourseContent{Content="1050", Course=courses[1], CourseID= courses[1].ID},
@@ -9966,9 +9972,9 @@ namespace ACE_Web_Based_Learning_System.Models
 
 
             };
-            courseContent.ForEach(s => context.CourseContent.Add(s));
+                courseContent.ForEach(s => context.CourseContent.Add(s));
 
-            var section = new List<Section>
+                var section = new List<Section>
             {
             new Section{SectionNo=01, Course=courses[0], CourseID= courses[0].ID, Capacity =200},
             new Section{SectionNo=02, Course=courses[1], CourseID= courses[1].ID, Capacity =500},
@@ -9986,53 +9992,53 @@ namespace ACE_Web_Based_Learning_System.Models
             new Section{SectionNo=14, Course=courses[13], CourseID= courses[13].ID, Capacity =210},
             new Section{SectionNo=15, Course=courses[14], CourseID= courses[14].ID, Capacity =200},
             new Section{SectionNo=16, Course=courses[15], CourseID= courses[15].ID, Capacity =500},
-            
+
 
 
             };
 
-            section.ForEach(s => context.Section.Add(s));
-            var tests = new List<Test>
+                section.ForEach(s => context.Section.Add(s));
+                var tests = new List<Test>
            {
               new Test{QUESTIONS="{ \"Questions\": [ { \"question\": \"Amet dolor occaecat ipsum deserunt nisi magna amet officia magna fugiat cillum. Est culpa sint reprehenderit amet nulla commodo dolor duis id est duis. Est laboris eiusmod adipisicing reprehenderit ipsum. Sint mollit consectetur velit voluptate cillum labore. Anim veniam ad occaecat elit nisi est dolore dolor labore sint ea ad. Mollit duis ullamco sint ad sint.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"eu\" }, { \"isAnswer\": false, \"answer\": \"ad\" }, { \"isAnswer\": true, \"answer\": \"in\" } ] }, { \"question\": \"Et elit et esse minim minim nulla do incididunt culpa culpa est. Deserunt nulla adipisicing eu amet elit in ut eu ut nostrud exercitation veniam consequat. Voluptate ex tempor tempor incididunt consequat est commodo. Excepteur labore velit sint voluptate incididunt occaecat adipisicing. Nisi do culpa quis ea.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"sit\" }, { \"isAnswer\": true, \"answer\": \"aliqua\" }, { \"isAnswer\": true, \"answer\": \"ullamco\" } ] }, { \"question\": \"Minim sunt occaecat do et ad cupidatat reprehenderit laborum ea dolor nisi cillum cupidatat. Exercitation et eiusmod nisi dolor est tempor ipsum laborum. Irure cillum non aliquip nostrud elit excepteur cillum eu do excepteur elit fugiat. Sint adipisicing aliquip cillum fugiat ut do sunt aliquip. Amet est exercitation duis laboris id culpa eiusmod ipsum qui officia. Mollit elit ex elit ea ut sint ad velit fugiat cillum veniam. Nulla id do laboris aliqua aliqua est amet anim voluptate amet.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"ex\" }, { \"isAnswer\": false, \"answer\": \"minim\" }, { \"isAnswer\": false, \"answer\": \"magna\" } ] }, { \"question\": \"Lorem ullamco do veniam ex nulla et occaecat irure qui fugiat minim anim nisi. Ea culpa laboris consectetur anim ad qui commodo ea ut eiusmod. Ex tempor sit minim eiusmod consequat commodo tempor ex ad consectetur. Nisi ex ea voluptate ipsum consectetur cupidatat. Aliqua excepteur eiusmod sit magna Lorem mollit eiusmod ea fugiat ex mollit. Non cupidatat ex tempor duis ipsum consequat voluptate dolore.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"officia\" }, { \"isAnswer\": false, \"answer\": \"minim\" }, { \"isAnswer\": false, \"answer\": \"ad\" } ] }, { \"question\": \"Voluptate eiusmod amet culpa occaecat excepteur nulla amet. Do do velit ipsum velit non excepteur sunt deserunt ea non qui. Sit do aliqua esse sint aliquip.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"qui\" }, { \"isAnswer\": false, \"answer\": \"velit\" }, { \"isAnswer\": false, \"answer\": \"do\" } ] }, { \"question\": \"Consectetur in ipsum culpa aute cillum velit culpa irure sunt laborum proident et. Aliqua anim labore eiusmod pariatur adipisicing proident aliqua labore nostrud pariatur cupidatat magna exercitation veniam. Ut reprehenderit fugiat magna ex magna ea magna consequat incididunt nisi. Incididunt minim esse veniam nulla dolore.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"pariatur\" }, { \"isAnswer\": true, \"answer\": \"laboris\" }, { \"isAnswer\": true, \"answer\": \"anim\" } ] }, { \"question\": \"Tempor qui nisi do velit ullamco do nisi ad magna. Eiusmod aliquip cupidatat officia cupidatat eu anim sit consectetur consectetur eu et tempor. Ipsum sunt culpa ullamco enim quis nisi tempor. Nostrud aliqua sint ea incididunt Lorem dolore consectetur voluptate ex pariatur ad consequat dolor veniam.\r\n\", \"answers\": [ { \"isAnswer\": false, \"answer\": \"eu\" }, { \"isAnswer\": false, \"answer\": \"eu\" }, { \"isAnswer\": true, \"answer\": \"irure\" } ] } ] }", Course=courses[0] } };
 
 
 
-            tests.ForEach(s => context.Test.Add(s));
+                tests.ForEach(s => context.Test.Add(s));
 
 
-            for (int i = 0; i < 5; i++)
-            {
-
-                var tempUser = new User();
-                Random random = new Random();
-                int randoNum = random.Next(0, names.Length);
-                int randoNum4 = random.Next(0, 14);
-                int randoNum2 = random.Next(0, names.Length);
-                int randoNum3 = random.Next(0, names.Length);
-                tempUser.LastName = names[randoNum];
-                tempUser.FirstName = names[randoNum2];
-                var credential = new Credential { ID = tempUser.FirstName + tempUser.LastName + randoNum3, Password = "password", UserID = (i + 1), User = tempUser };
-                var content = new UserContent { ID = tempUser.FirstName + tempUser.LastName + randoNum3, Email = tempUser.FirstName + tempUser.LastName + randoNum3 + "@gmail.com", UserID = (i + 1), User = tempUser };
-                context.User.Add(tempUser);
-                context.Credential.Add(credential);
-                context.UserContent.Add(content);
-                
-                for (int j = 0; j < randoNum4; j++)
+                for (int i = 0; i < 5; i++)
                 {
-                   var x = new Enrollment { Type = "Test", User = tempUser, Section = section[j], UserID = (i + 1), SectionID = section[j].ID };
-                    context.Enrollment.Add(x);
-                    
+
+                    var tempUser = new User();
+                    Random random = new Random();
+                    int randoNum = random.Next(0, names.Length);
+                    int randoNum4 = random.Next(0, 14);
+                    int randoNum2 = random.Next(0, names.Length);
+                    int randoNum3 = random.Next(0, names.Length);
+                    tempUser.LastName = names[randoNum];
+                    tempUser.FirstName = names[randoNum2];
+                    var credential = new Credential { ID = tempUser.FirstName + tempUser.LastName + randoNum3, Password = "password", UserID = (i + 1), User = tempUser };
+                    var content = new UserContent { ID = tempUser.FirstName + tempUser.LastName + randoNum3, Email = tempUser.FirstName + tempUser.LastName + randoNum3 + "@gmail.com", UserID = (i + 1), User = tempUser };
+                    context.User.Add(tempUser);
+                    context.Credential.Add(credential);
+                    context.UserContent.Add(content);
+
+                    for (int j = 0; j < randoNum4; j++)
+                    {
+                        var x = new Enrollment { Type = "Test", User = tempUser, Section = section[j], UserID = (i + 1), SectionID = section[j].ID };
+                        context.Enrollment.Add(x);
+
+                    }
+
+
+
                 }
-               
+                context.SaveChanges();
+
 
 
             }
-            context.SaveChanges();
-
-
-
-
         }
     }
 }

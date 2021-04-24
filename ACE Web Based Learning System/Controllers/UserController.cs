@@ -481,7 +481,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
                     var userContent = dbContext.UserContent.SingleOrDefault(i => i.ID == username);
 
 
-                    if (userCredential.Password != password)
+                    if (userCredential == null || userCredential.Password != password)
                     {
                         throw new Exception("Incorrect password");
                     }
