@@ -7,7 +7,7 @@ using ACE_Web_Based_Learning_System.DAL;
 
 namespace ACE_Web_Based_Learning_System.Models
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseAlways<SchoolContext> //Change IfModelChanges to Always to force db rebuild
+    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext> //Change IfModelChanges to Always to force db rebuild
     {
 
         protected override void Seed(SchoolContext context)
@@ -10007,7 +10007,7 @@ namespace ACE_Web_Based_Learning_System.Models
                 tests.ForEach(s => context.Test.Add(s));
 
 
-                for (int i = 0; i < 5; i++)
+                for (int i = 1; i <= 5; i++)
                 {
 
                     var tempUser = new User();
