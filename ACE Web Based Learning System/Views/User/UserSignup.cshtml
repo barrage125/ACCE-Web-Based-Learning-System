@@ -57,9 +57,14 @@
             </select>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
                 <label for="userStatus">Status</label>
-                <textarea id="userStatus" class="form-control" id="userStatus" placeholder="Enter Status (Optional)" rows="3"></textarea>
+                <textarea id="userStatus" class="form-control" placeholder="Enter Status (Optional)" rows="3"></textarea>
+                <br>
+                <label for="color">Please select your preferred color: </label>
+                <input type="color" id="color" name="userColor" value="#595959">
+                <br><br>
+                <button id="submit" class="btn btn-default">Submit</button>
             </div>
         </div>
     </div>
@@ -67,8 +72,6 @@
         <div class="form-group col-md-6">
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="password" placeholder="Enter password" name="pwd">
-            <br>
-            <button id="submit" class="btn btn-default">Submit</button>
         </div>
         <div class="col-md-6">
             <p class="mb-2">Password requirements</p>
@@ -82,8 +85,6 @@
     </div>
 </div>
 
-<!-- Forgot to include color choice, will implement it in the next Sprint-->
-
 <script>
     //DO NOT KEEP THIS HERE, ADD TO BUNDLE
     document.getElementById("submit").addEventListener("click", function () {
@@ -95,7 +96,7 @@
         var pronoun = document.getElementById("pronoun").value;
         var age = document.getElementById("age").value;
         var role = document.getElementById("role").value;
-        var color =  "red";
+        var color = document.getElementById("color").value;
         var pack = { firstName, lastName, email, gender, pronoun, age, role, color };
 
         fetch('/User/AddUserToDatabase?firstName=' + firstName + '&lastName=' + lastName + '&email=' + email + '&gender=' + gender + '&pronoun=' + pronoun + '&age=' + age + '&role=' + role + '&color=' + color + '&password=' + password, {
