@@ -13,10 +13,10 @@ namespace ACE_Web_Based_Learning_System.Controllers
 {
     public class UserController : Controller
     {
-       
+
         public User user;
 
-        
+
 
         // GET: Users/UserSettings
         public ActionResult UserSettings()
@@ -164,7 +164,7 @@ namespace ACE_Web_Based_Learning_System.Controllers
         #region Edit User Content Section
         public ActionResult editFirstName(string newName, string password)
         {
-            
+
             try
             {
                 //singleordefault will only grab if there is a single element in the databsae
@@ -199,9 +199,9 @@ namespace ACE_Web_Based_Learning_System.Controllers
                 //will NOT return an indication of exception for security reasons
                 Console.WriteLine(e);
                 var loginresult = new JsonResult { Message = "bad" };
-                return Json(loginresult);               
+                return Json(loginresult);
             }
-                
+
         }
 
         public ActionResult editLastName(string newName, string password)
@@ -434,24 +434,24 @@ namespace ACE_Web_Based_Learning_System.Controllers
 
                     //grabs user and usercontent and crossreferences their password
                     var sessionUser = Session["User"] as User;
-                var credentials = Session["UserCredentials"] as Credential;
-                var sessionContent = Session["UserContent"] as UserContent;
-                if (password == credentials.Password)
-                {
-                    UserContent content = dbContext.UserContent.Find(sessionContent.ID);
-                    UserContent newContent = content;
-                    newContent.Color = newColor;
-                    dbContext.Entry(content).CurrentValues.SetValues(newContent);
+                    var credentials = Session["UserCredentials"] as Credential;
+                    var sessionContent = Session["UserContent"] as UserContent;
+                    if (password == credentials.Password)
+                    {
+                        UserContent content = dbContext.UserContent.Find(sessionContent.ID);
+                        UserContent newContent = content;
+                        newContent.Color = newColor;
+                        dbContext.Entry(content).CurrentValues.SetValues(newContent);
 
-                    dbContext.SaveChanges();
+                        dbContext.SaveChanges();
 
-                    Session["UserContent"] = content;
-                    return Json(Url.Action("UserSettings", "User"));
-                }
-                else
-                {
-                    throw new Exception("Incorrect password");
-                }
+                        Session["UserContent"] = content;
+                        return Json(Url.Action("UserSettings", "User"));
+                    }
+                    else
+                    {
+                        throw new Exception("Incorrect password");
+                    }
                 }
 
             }
@@ -468,13 +468,14 @@ namespace ACE_Web_Based_Learning_System.Controllers
         #endregion
         public bool login(string username, string password)
         {
-            try
+
+            //grabs user credential and user content
+            //singleordefault will only grab if there is a single element in the databsae
+            //if more than one or zero is found, then it will throw an exception
+            //using statement automatically disposes after use
+            using (SchoolContext dbContext = new SchoolContext())
             {
-                //grabs user credential and user content
-                //singleordefault will only grab if there is a single element in the databsae
-                //if more than one or zero is found, then it will throw an exception
-                //using statement automatically disposes after use
-                using (SchoolContext dbContext = new SchoolContext())
+                try
                 {
                     var userCredential = dbContext.Credential.SingleOrDefault(i => i.ID == username);
                     var userContent = dbContext.UserContent.SingleOrDefault(i => i.ID == username);
@@ -490,11 +491,11 @@ namespace ACE_Web_Based_Learning_System.Controllers
                     var enrollments = dbContext.Enrollment.Where(i => i.UserID == userID).ToList();
                     var courses = new List<Course>();
 
-                    foreach(var enroll in enrollments)
+                    foreach (var enroll in enrollments)
                     {
                         courses.Add(enroll.Section.Course);
                     }
-                   
+
                     //sets enrolled courses to session data
                     Session["Courses"] = courses;
 
@@ -504,23 +505,19 @@ namespace ACE_Web_Based_Learning_System.Controllers
                     Session["UserContent"] = userContent;
                     Session["UserCredentials"] = userCredential;
 
-                    
+                    return true;
                 }
-                //if all is good, then return true
-
-                return true;
-                
-
-            }
-            catch (Exception e)
-            {
+                //if all is good, then return true           
+                catch (Exception e)
+                {
                 //will return false to resume operation
                 //will NOT return an indication of exception for security reasons
                 Console.WriteLine(e);
                 return false;
-            }
-           
+                }
+
         }
+    }
         public ActionResult CheckIfUser(string email, string password)
         {
 

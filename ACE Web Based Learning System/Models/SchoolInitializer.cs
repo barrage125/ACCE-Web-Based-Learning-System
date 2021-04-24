@@ -9,7 +9,7 @@ namespace ACE_Web_Based_Learning_System.Models
 {
     public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext> //Change IfModelChanges to Always to force db rebuild
     {
-        
+
         protected override void Seed(SchoolContext context)
         {
             var names = new String[] {"Aaren"
@@ -9905,20 +9905,20 @@ namespace ACE_Web_Based_Learning_System.Models
 "Zuzana"
             }
 ;
-            
-           
-            
-          
-           
 
-          
+
+
+
+
+
+
 
             var department = new List<Department>
             {
                 new Department{ID="TestDepartment"}
             };
             department.ForEach(s => context.Department.Add(s));
-            
+
 
 
 
@@ -9963,7 +9963,7 @@ namespace ACE_Web_Based_Learning_System.Models
             new CourseContent{Content="1050", Course=courses[13], CourseID= courses[13].ID},
             new CourseContent{Content="1050", Course=courses[14], CourseID= courses[14].ID},
             new CourseContent{Content="1050", Course=courses[15], CourseID= courses[15].ID},
-          
+
 
             };
             courseContent.ForEach(s => context.CourseContent.Add(s));
@@ -9986,25 +9986,20 @@ namespace ACE_Web_Based_Learning_System.Models
             new Section{SectionNo=14, Course=courses[13], CourseID= courses[13].ID, Capacity =210},
             new Section{SectionNo=15, Course=courses[14], CourseID= courses[14].ID, Capacity =200},
             new Section{SectionNo=16, Course=courses[15], CourseID= courses[15].ID, Capacity =500},
-            new Section{SectionNo=17, Course=courses[1], CourseID= courses[1].ID, Capacity =700},
-            new Section{SectionNo=18, Course=courses[2], CourseID= courses[2].ID, Capacity =300},
-            new Section{SectionNo=19, Course=courses[3], CourseID= courses[3].ID, Capacity =220},
-            new Section{SectionNo=20, Course=courses[4], CourseID= courses[4].ID, Capacity =230},
-            new Section{SectionNo=21, Course=courses[5], CourseID= courses[5].ID, Capacity =210},
-            new Section{SectionNo=22, Course=courses[6], CourseID= courses[6].ID, Capacity =200},
-            new Section{SectionNo=23, Course=courses[7], CourseID= courses[7].ID, Capacity =500},
-            new Section{SectionNo=24, Course=courses[8], CourseID= courses[8].ID, Capacity =700},
-            new Section{SectionNo=25, Course=courses[9], CourseID= courses[9].ID, Capacity =300},
-            new Section{SectionNo=26, Course=courses[10], CourseID= courses[10].ID, Capacity =220},
-            new Section{SectionNo=27, Course=courses[11], CourseID= courses[11].ID, Capacity =230},
-            new Section{SectionNo=28, Course=courses[12], CourseID= courses[12].ID, Capacity =210},
-            new Section{SectionNo=29, Course=courses[13], CourseID= courses[13].ID, Capacity =210},
-            new Section{SectionNo=30, Course=courses[14], CourseID= courses[14].ID, Capacity =210},
-            new Section{SectionNo=31, Course=courses[15], CourseID= courses[15].ID, Capacity =210},
-          
+            
+
 
             };
+
             section.ForEach(s => context.Section.Add(s));
+            var tests = new List<Test>
+           {
+              new Test{QUESTIONS="{ \"Questions\": [ { \"question\": \"Amet dolor occaecat ipsum deserunt nisi magna amet officia magna fugiat cillum. Est culpa sint reprehenderit amet nulla commodo dolor duis id est duis. Est laboris eiusmod adipisicing reprehenderit ipsum. Sint mollit consectetur velit voluptate cillum labore. Anim veniam ad occaecat elit nisi est dolore dolor labore sint ea ad. Mollit duis ullamco sint ad sint.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"eu\" }, { \"isAnswer\": false, \"answer\": \"ad\" }, { \"isAnswer\": true, \"answer\": \"in\" } ] }, { \"question\": \"Et elit et esse minim minim nulla do incididunt culpa culpa est. Deserunt nulla adipisicing eu amet elit in ut eu ut nostrud exercitation veniam consequat. Voluptate ex tempor tempor incididunt consequat est commodo. Excepteur labore velit sint voluptate incididunt occaecat adipisicing. Nisi do culpa quis ea.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"sit\" }, { \"isAnswer\": true, \"answer\": \"aliqua\" }, { \"isAnswer\": true, \"answer\": \"ullamco\" } ] }, { \"question\": \"Minim sunt occaecat do et ad cupidatat reprehenderit laborum ea dolor nisi cillum cupidatat. Exercitation et eiusmod nisi dolor est tempor ipsum laborum. Irure cillum non aliquip nostrud elit excepteur cillum eu do excepteur elit fugiat. Sint adipisicing aliquip cillum fugiat ut do sunt aliquip. Amet est exercitation duis laboris id culpa eiusmod ipsum qui officia. Mollit elit ex elit ea ut sint ad velit fugiat cillum veniam. Nulla id do laboris aliqua aliqua est amet anim voluptate amet.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"ex\" }, { \"isAnswer\": false, \"answer\": \"minim\" }, { \"isAnswer\": false, \"answer\": \"magna\" } ] }, { \"question\": \"Lorem ullamco do veniam ex nulla et occaecat irure qui fugiat minim anim nisi. Ea culpa laboris consectetur anim ad qui commodo ea ut eiusmod. Ex tempor sit minim eiusmod consequat commodo tempor ex ad consectetur. Nisi ex ea voluptate ipsum consectetur cupidatat. Aliqua excepteur eiusmod sit magna Lorem mollit eiusmod ea fugiat ex mollit. Non cupidatat ex tempor duis ipsum consequat voluptate dolore.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"officia\" }, { \"isAnswer\": false, \"answer\": \"minim\" }, { \"isAnswer\": false, \"answer\": \"ad\" } ] }, { \"question\": \"Voluptate eiusmod amet culpa occaecat excepteur nulla amet. Do do velit ipsum velit non excepteur sunt deserunt ea non qui. Sit do aliqua esse sint aliquip.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"qui\" }, { \"isAnswer\": false, \"answer\": \"velit\" }, { \"isAnswer\": false, \"answer\": \"do\" } ] }, { \"question\": \"Consectetur in ipsum culpa aute cillum velit culpa irure sunt laborum proident et. Aliqua anim labore eiusmod pariatur adipisicing proident aliqua labore nostrud pariatur cupidatat magna exercitation veniam. Ut reprehenderit fugiat magna ex magna ea magna consequat incididunt nisi. Incididunt minim esse veniam nulla dolore.\r\n\", \"answers\": [ { \"isAnswer\": true, \"answer\": \"pariatur\" }, { \"isAnswer\": true, \"answer\": \"laboris\" }, { \"isAnswer\": true, \"answer\": \"anim\" } ] }, { \"question\": \"Tempor qui nisi do velit ullamco do nisi ad magna. Eiusmod aliquip cupidatat officia cupidatat eu anim sit consectetur consectetur eu et tempor. Ipsum sunt culpa ullamco enim quis nisi tempor. Nostrud aliqua sint ea incididunt Lorem dolore consectetur voluptate ex pariatur ad consequat dolor veniam.\r\n\", \"answers\": [ { \"isAnswer\": false, \"answer\": \"eu\" }, { \"isAnswer\": false, \"answer\": \"eu\" }, { \"isAnswer\": true, \"answer\": \"irure\" } ] } ] }", Course=courses[0] } };
+
+
+
+            tests.ForEach(s => context.Test.Add(s));
+
 
             for (int i = 0; i < 5; i++)
             {
@@ -10012,7 +10007,7 @@ namespace ACE_Web_Based_Learning_System.Models
                 var tempUser = new User();
                 Random random = new Random();
                 int randoNum = random.Next(0, names.Length);
-                int randoNum4 = random.Next(0, 28);
+                int randoNum4 = random.Next(0, 14);
                 int randoNum2 = random.Next(0, names.Length);
                 int randoNum3 = random.Next(0, names.Length);
                 tempUser.LastName = names[randoNum];
